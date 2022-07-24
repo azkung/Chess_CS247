@@ -1,3 +1,3 @@
 #include "rook.h"
 
-Rook::Rook(char color) : Piece(color) {}
+Rook::Rook(char color) : Piece(color) {appendName('R');}

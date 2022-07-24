@@ -1,4 +1,8 @@
 #include "tile.h"
+#include <string>
+
+using namespace std;
+
 
 Tile::Tile(int row, int col, Piece *piece) : row(row), col(col), piece(piece) {}
 
@@ -14,4 +18,14 @@ Tile::~Tile() {
     if(piece != nullptr) {
         delete piece;
     }
+}
+
+
+string Tile::getState() {
+    if(piece == nullptr) {
+        return "  ";
+    }
+    
+
+    
 }
