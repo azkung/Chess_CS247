@@ -4,8 +4,8 @@
 
 class Rook : public Piece{
     public:
-        Rook(char color, int row, int col);
-
+        Rook(char color);
+        
 };
 
 

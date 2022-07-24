@@ -5,7 +5,7 @@
 
 class Pawn : public Piece{
     public:
-        Pawn(char color, int row, int col);
+        Pawn(char color);
 };
 
 #endif // PAWN_H_

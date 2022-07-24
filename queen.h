@@ -5,7 +5,7 @@
 
 class Queen : public Piece{
     public:
-        Queen(char color, int row, int col);
+        Queen(char color);
 };
 
 #endif // QUEEEN_H_

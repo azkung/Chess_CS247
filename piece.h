@@ -7,7 +7,6 @@ class Piece{
     public:
         Piece(char color);
         virtual ~Piece() = 0;
-        virtual std::string getState() = 0;
 };
 
 

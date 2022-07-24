@@ -5,7 +5,7 @@
 
 class Knight : public Piece{
     public:
-        Knight(char color, int row, int col);
+        Knight(char color);
 };
 
 #endif // KNIGHT_H_
