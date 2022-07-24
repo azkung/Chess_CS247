@@ -5,6 +5,9 @@
 #include "observer.h"
 #include "textObserver.h"
 
-void textObserver::notify(Tile &subject){
-    subject.getState();
+using namespace std;
+
+void TextObserver::notify(Tile &subject){
+    string state = subject.getState();
+    board[subject.getRow()][subject.getCol()] = state;
 }

@@ -6,12 +6,12 @@
 #include "tile.h"
 #include "piece.h"
 
-class textObserver : public Observer {
+class TextObserver : public Observer {
         std::vector<std::vector<std::string>> board;
 
     public:
-        textObserver();
-        ~textObserver();
+        TextObserver();
+        ~TextObserver();
         void notify(Tile &subject);
 };
 

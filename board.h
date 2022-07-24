@@ -5,9 +5,12 @@
 #include <vector>
 #include <string>
 #include "tile.h"
+#include "textObserver.h"
 
 class Board{
     std::vector<std::vector<Tile*>> tiles;
+    TextObserver *textScreen;
+
     public:
         Board();
         ~Board();
