@@ -1,17 +1,21 @@
-#ifndef _SUBJECT_H_
-#define _SUBJECT_H_
-#include <vector>
-#include "observer.h"
+#include "subject.h"
 
-class Subject {
-    std::vector<Observer*> observers;
+Subject::Subject() {}
+Subject::~Subject() {}
 
-    public:
-        Subject();
-        void attach( Observer *o );
-        void detach( Observer *o );
-        void notifyObservers();
-        virtual ~Subject() = 0;
-};
+void Subject::attach( Observer *o ) {
+  observers.emplace_back(o);
+}
 
-#endif
+void Subject::detach( Observer *o ) {
+  for ( auto it = observers.begin(); it != observers.end(); ++it ) {
+    if ( *it == o ) {
+      observers.erase(it);
+      break;
+    }
+  }
+}
+
+void Subject::notifyObservers() {
+  for (auto ob : observers) ob->notify();
+}

@@ -2,9 +2,12 @@
 #define PIECE_H_
 
 class Piece{
+        int movesMade;
+        char color;
     public:
-        Piece();
+        Piece(char color);
         virtual ~Piece() = 0;
+        virtual std::string getState() = 0;
 };
 
 

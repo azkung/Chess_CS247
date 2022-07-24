@@ -2,13 +2,17 @@
 #define TILE_H_
 #include <iostream>
 #include <string>
+#include "subject.h"
+#include "piece.h"
 
-
-class Tile{
+class Tile : public Subject{
+        Piece *piece;
+        int x;
+        int y;
     public:
-        Tile();
-        virtual ~Tile() = 0;
+        Tile(int x, int y, Piece *piece);
+        ~Tile();
+        std::string getState();
 };
-
 
 #endif // TILE_H_
