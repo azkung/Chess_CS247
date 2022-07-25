@@ -24,3 +24,11 @@ const int Move::getPrevCol(){
 const int Move::getPrevRow(){
     return this->prevRow;
 }
+
+const bool Move::getIsCastle(){
+    return this->isCastle;
+}
+
+const bool Move::getIsEnPassant(){
+    return this->isEnPassant;
+}

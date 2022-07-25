@@ -43,7 +43,7 @@ Game::Game(){
     
     textScreen = new TextObserver(stringBoard);
     board = new Board(textScreen);
-
+    textScreen->printBoard();
 }
 
 
@@ -62,6 +62,8 @@ void Game::makeMove(){
 
 
     board->move(row1Int, col1Int, row2Int, col2Int);
+
+
     textScreen->printBoard();
 }
 

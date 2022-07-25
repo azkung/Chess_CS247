@@ -27,6 +27,8 @@ class Piece{
         const int getLastMoved();
         void appendName(char c);
 
+        void setLastMoved(int lastMoved);
+
         virtual std::vector<Move> findMoves(int row, int col, Board *board) = 0;
 };
 

@@ -2,6 +2,7 @@
 #include "board.h"
 #include "move.h"
 #include <vector>
+#include <iostream>
 
 King::King(char color) : Piece(color) {appendName('K');}
 
@@ -51,38 +52,39 @@ std::vector<Move> King::findMoves(int row, int col, Board *board){
 
     //Castling
     if(lastMoved == -1){
-        if(color == 'w'){
+        if(color == 'b'){
             if(board->getPiece(0, 0) != nullptr && 
-                board->getPiece(0, 0)->getName() == "wR" && 
+                board->getPiece(0, 0)->getName() == "bR" && 
                 board->getPiece(0, 0)->getLastMoved() == -1 &&
                 board->getPiece(0, 1) == nullptr && 
                 board->getPiece(0, 2) == nullptr && 
                 board->getPiece(0, 3) == nullptr){
-                moves.push_back(Move(row, col, 0, 2, true, false));
+                moves.push_back(Move(0, 2, row, col, true, false));
             }
             if(board->getPiece(0, 7) != nullptr && 
-                board->getPiece(0, 7)->getName() == "wR" && 
+                board->getPiece(0, 7)->getName() == "bR" && 
                 board->getPiece(0, 7)->getLastMoved() == -1 &&
                 board->getPiece(0, 5) == nullptr && 
                 board->getPiece(0, 6) == nullptr){
-                moves.push_back(Move(row, col, 0, 6, true, false));
+                moves.push_back(Move(0, 6, row, col, true, false));
             }
         }
         else{
+            std::cout << "hi";
             if(board->getPiece(7, 0) != nullptr && 
-                board->getPiece(7, 0)->getName() == "bR" && 
+                board->getPiece(7, 0)->getName() == "wR" && 
                 board->getPiece(7, 0)->getLastMoved() == -1 &&
                 board->getPiece(7, 1) == nullptr && 
                 board->getPiece(7, 2) == nullptr && 
                 board->getPiece(7, 3) == nullptr){
-                moves.push_back(Move(row, col, 7, 2, true, false));
+                moves.push_back(Move(7, 2, row, col, true, false));
             }
             if(board->getPiece(7, 7) != nullptr && 
-                board->getPiece(7, 7)->getName() == "bR" && 
+                board->getPiece(7, 7)->getName() == "wR" && 
                 board->getPiece(7, 7)->getLastMoved() == -1 &&
                 board->getPiece(7, 5) == nullptr && 
                 board->getPiece(7, 6) == nullptr){
-                moves.push_back(Move(row, col, 7, 6, true, false));
+                moves.push_back(Move(7, 6, row, col, true, false));
             }
         }
     }
