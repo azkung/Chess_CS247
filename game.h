@@ -12,8 +12,9 @@ class Game{
     public:
         Game();
         ~Game();
-        void makeMove();
+        bool makeMove();
         void drawScreen();
+
 };
 
 

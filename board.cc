@@ -64,8 +64,69 @@ Board::Board(TextObserver *textScreen) : moveCounter{0} {
         }
     }
 
-    textScreen->printBoard();
 }
+
+Board::Board(const Board &other, TextObserver *textScreen) : moveCounter{other.moveCounter} {
+
+    tiles.resize(8);
+    for(int i = 0; i < 8; i++){
+        tiles[i].resize(8);
+    }
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            tiles[i][j] = new Tile(i, j, nullptr);
+        }
+    }
+
+
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            if(other.tiles[i][j]->getPiece() != nullptr){
+                if(other.tiles[i][j]->getPiece()->getName() == "wP"){
+                    tiles[i][j]->initPiece(new Pawn('w'));
+                }
+                else if(other.tiles[i][j]->getPiece()->getName() == "wR"){
+                    tiles[i][j]->initPiece(new Rook('w'));
+                }
+                else if(other.tiles[i][j]->getPiece()->getName() == "wN"){
+                    tiles[i][j]->initPiece(new Knight('w'));
+                }
+                else if(other.tiles[i][j]->getPiece()->getName() == "wB"){
+                    tiles[i][j]->initPiece(new Bishop('w'));
+                }
+                else if(other.tiles[i][j]->getPiece()->getName() == "wQ"){
+                    tiles[i][j]->initPiece(new Queen('w'));
+                }
+                else if(other.tiles[i][j]->getPiece()->getName() == "wK"){
+                    tiles[i][j]->initPiece(new King('w'));
+                }
+                else if(other.tiles[i][j]->getPiece()->getName() == "bP"){
+                    tiles[i][j]->initPiece(new Pawn('b'));
+                }
+                else if(other.tiles[i][j]->getPiece()->getName() == "bR"){
+                    tiles[i][j]->initPiece(new Rook('b'));
+                }
+                else if(other.tiles[i][j]->getPiece()->getName() == "bN"){
+                    tiles[i][j]->initPiece(new Knight('b'));
+                }
+                else if(other.tiles[i][j]->getPiece()->getName() == "bB"){
+                    tiles[i][j]->initPiece(new Bishop('b'));
+                }
+                else if(other.tiles[i][j]->getPiece()->getName() == "bQ"){
+                    tiles[i][j]->initPiece(new Queen('b'));
+                }
+                else if(other.tiles[i][j]->getPiece()->getName() == "bK"){
+                    tiles[i][j]->initPiece(new King('b'));
+                }
+                tiles[i][j]->getPiece()->setLastMoved(other.tiles[i][j]->getPiece()->getLastMoved());
+            }
+            else{
+                tiles[i][j]->initPiece(nullptr);
+            }
+        }
+    }
+}
+
 
 Board::~Board(){
     for(int i = 0; i < 8; i++){
@@ -83,15 +144,192 @@ int Board::getMoveCounter(){
     return moveCounter;
 }
 
-void Board::move(int row1, int col1, int row2, int col2){
+bool Board::inCheck(char playerTurn){
+    if(playerTurn == 'w'){
+        int kingRow = 0;
+        int kingCol = 0; 
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                if(tiles[i][j]->getPiece() != nullptr){
+                    if(tiles[i][j]->getPiece()->getName() == "wK"){
+                        kingRow = i;
+                        kingCol = j;
+                    }
+                }
+            }
+        }
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                if(tiles[i][j]->getPiece() != nullptr){
+                    if(tiles[i][j]->getPiece()->getColor() == 'b'){
+                        vector<Move> moves = tiles[i][j]->findMoves(this);
+                        for(int k = 0; k < moves.size(); k++){
+                            if(moves[k].getRow() == kingRow && moves[k].getCol() == kingCol){
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    else{
+        int kingRow = 0;
+        int kingCol = 0; 
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                if(tiles[i][j]->getPiece() != nullptr){
+                    if(tiles[i][j]->getPiece()->getName() == "bK"){
+                        kingRow = i;
+                        kingCol = j;
+                    }
+                }
+            }
+        }
+
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                if(tiles[i][j]->getPiece() != nullptr){
+                    if(tiles[i][j]->getPiece()->getColor() == 'w'){
+                        vector<Move> moves = tiles[i][j]->findMoves(this);
+                        for(int k = 0; k < moves.size(); k++){
+                            if(moves[k].getRow() == kingRow && moves[k].getCol() == kingCol){
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
+bool Board::inCheckmate(char playerTurn){
+    // returns whether playerTurn is in chceck
+    vector<vector<string>> temp;
+    TextObserver* t =  new TextObserver(temp);
+    if(inCheck(playerTurn)){
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                if(tiles[i][j]->getPiece() != nullptr){
+                    if(tiles[i][j]->getPiece()->getColor() == playerTurn){
+                        vector<Move> moves = tiles[i][j]->findMoves(this);
+                        killRestrict(moves, playerTurn);
+                        if(moves.size() > 0){
+                            delete t;
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        delete t;
+        return true;
+    }
+    delete t;
+    return false;
+    
+}
+
+void Board::killRestrict(vector<Move>& moves, char playerTurn){
+    vector<vector<string>> temp;
+    TextObserver* t =  new TextObserver(temp);
+    if(playerTurn == 'w'){
+        for(int i = 0; i < moves.size(); i++){
+            int row1 = moves[i].getPrevRow();
+            int col1 = moves[i].getPrevCol();
+            int row2 = moves[i].getRow();
+            int col2 = moves[i].getCol();
+            Board tempBoard = Board(*this, t);
+
+            Piece* piece1 = tempBoard.getPiece(row1, col1);
+            Piece* piece2 = tempBoard.getPiece(row2, col2);
+
+            if(piece2 != nullptr){
+                delete piece2;
+                tempBoard.tiles[row2][col2]->initPiece(piece1);
+            }
+
+            piece1->setLastMoved(moveCounter);
+            
+            tempBoard.tiles[row1][col1]->setPiece(nullptr);
+            tempBoard.tiles[row2][col2]->setPiece(piece1);
+
+            if(moves[i].getIsCastle()){
+                if(moves[i].getCol() == 2){
+                    tempBoard.tiles[row2][3]->setPiece(tempBoard.tiles[row2][0]->getPiece());
+                    tempBoard.tiles[row2][3]->getPiece()->setLastMoved(moveCounter);
+                    tempBoard.tiles[row2][0]->setPiece(nullptr);
+                }
+                else{
+                    tempBoard.tiles[row2][5]->setPiece(tempBoard.tiles[row2][7]->getPiece());
+                    tempBoard.tiles[row2][5]->getPiece()->setLastMoved(moveCounter);
+                    tempBoard.tiles[row2][7]->setPiece(nullptr);
+                }
+            }
+
+            if(tempBoard.inCheck('w')){
+                moves.erase(moves.begin() + i);
+                i--;
+            }
+        }
+    }
+    else{
+        for(int i = 0; i < moves.size(); i++){
+            int row1 = moves[i].getPrevRow();
+            int col1 = moves[i].getPrevCol();
+            int row2 = moves[i].getRow();
+            int col2 = moves[i].getCol();
+            Board tempBoard = Board(*this, t);
+
+            Piece* piece1 = tempBoard.getPiece(row1, col1);
+            Piece* piece2 = tempBoard.getPiece(row2, col2);
+            if(piece2 != nullptr){
+                delete piece2;
+                tempBoard.tiles[row2][col2]->initPiece(piece1);
+            }
+            piece1->setLastMoved(moveCounter);
+            tempBoard.tiles[row1][col1]->setPiece(nullptr);
+            tempBoard.tiles[row2][col2]->setPiece(piece1);
+            if(moves[i].getIsCastle()){
+                if(moves[i].getCol() == 2){
+                    tempBoard.tiles[row2][3]->setPiece(tempBoard.tiles[row2][0]->getPiece());
+                    tempBoard.tiles[row2][3]->getPiece()->setLastMoved(moveCounter);
+                    tempBoard.tiles[row2][0]->setPiece(nullptr);
+                }
+                else{
+                    tempBoard.tiles[row2][5]->setPiece(tempBoard.tiles[row2][7]->getPiece());
+                    tempBoard.tiles[row2][5]->getPiece()->setLastMoved(moveCounter);
+                    tempBoard.tiles[row2][7]->setPiece(nullptr);
+                }
+            }
+            if(tempBoard.inCheck('b')){
+                moves.erase(moves.begin() + i);
+                i--;
+            }
+        }
+    }
+    delete t;
+}
+
+
+bool Board::move(int row1, int col1, int row2, int col2){
     vector<Move> moves = tiles[row1][col1]->findMoves(this);
+    if(tiles[row1][col1]->getPiece()->getColor() != getTurn()){
+        return false;
+    }
+    killRestrict(moves, getTurn());
+
 
     Piece* piece1 = tiles[row1][col1]->getPiece();
     Piece* piece2 = tiles[row2][col2]->getPiece();
     bool found = false;
+    int index = 0;
     for(int i = 0; i < moves.size(); i++){
         if(moves[i].getPrevRow() == row1 && moves[i].getPrevCol() == col1 && moves[i].getRow() == row2 && moves[i].getCol() == col2){
             found = true;
+            index = i;
             break;
         }
     }
@@ -100,11 +338,34 @@ void Board::move(int row1, int col1, int row2, int col2){
             delete piece2;
             tiles[row2][col2]->initPiece(piece1);
         }
+
+        piece1->setLastMoved(moveCounter);
+        
         tiles[row1][col1]->setPiece(nullptr);
         tiles[row2][col2]->setPiece(piece1);
+
+        if(moves[index].getIsCastle()){
+            if(moves[index].getCol() == 2){
+                tiles[row2][3]->setPiece(tiles[row2][0]->getPiece());
+                tiles[row2][3]->getPiece()->setLastMoved(moveCounter);
+                tiles[row2][0]->setPiece(nullptr);
+            }
+            else{
+                tiles[row2][5]->setPiece(tiles[row2][7]->getPiece());
+                tiles[row2][5]->getPiece()->setLastMoved(moveCounter);
+                tiles[row2][7]->setPiece(nullptr);
+            }
+        }
+
         moveCounter++;
+        return true;
     }
-    else{
-        cout << "Invalid move" << endl;
+    return false;
+}
+
+char Board::getTurn(){
+    if(moveCounter % 2 == 0){
+        return 'w';
     }
+    return 'b';
 }

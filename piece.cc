@@ -27,6 +27,10 @@ const char Piece::getColor() {
     return color;
 }
 
+void Piece::setLastMoved(int lastMoved) {
+    this->lastMoved = lastMoved;
+}
+
 Piece::Piece(const Piece &other) : color{other.color}, movesMade{other.movesMade}, lastMoved{other.lastMoved}, name{other.name} {}
 
 Piece::~Piece() {}
