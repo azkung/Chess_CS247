@@ -65,7 +65,6 @@ Board::Board(){
         }
     }
 
-    cout << "Welcome to Chess!" << endl;
     textScreen->printBoard();
 }
 

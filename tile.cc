@@ -23,7 +23,7 @@ Tile::~Tile() {
 
 string Tile::getState() {
     if(piece == nullptr) {
-        return "  ";
+        return "__";
     }
     return piece->getName();
 }

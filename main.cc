@@ -5,7 +5,13 @@
 using namespace std;
 
 int main(){
-    Game g;
+    Game* g = new Game();
+
+    while(true){
+        g->makeMove();
+    }
+
+    delete g;
 
     return 0;
 }
