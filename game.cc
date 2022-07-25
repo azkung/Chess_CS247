@@ -6,6 +6,8 @@
 
 using namespace std;
 
+SDL_Runner g;
+
 Game::Game(){
     cout << "Welcome to Chess!" << endl;
     vector<vector<string>> stringBoard;
@@ -43,7 +45,79 @@ Game::Game(){
     
     textScreen = new TextObserver(stringBoard);
     board = new Board(textScreen);
+    drawScreen();
 
+}
+
+void Game::drawScreen() {
+    Colour green{'\x76','\x96','\x56'};
+    Colour tan{'\xEE','\xEE','\xD2'};
+
+    s.draw_rect(0, 0, 600, 600, green);
+    s.draw_rect(0, 0, 75, 75, tan);
+    s.draw_rect(150, 0, 75, 75, tan);
+    s.draw_rect(300, 0, 75, 75, tan);
+    s.draw_rect(450, 0, 75, 75, tan);
+
+    s.draw_rect(75, 75, 75, 75, tan);
+    s.draw_rect(225, 75, 75, 75, tan);
+    s.draw_rect(375, 75, 75, 75, tan);
+    s.draw_rect(525, 75, 75, 75, tan);
+
+    s.draw_rect(0, 150, 75, 75, tan);
+    s.draw_rect(150, 150, 75, 75, tan);
+    s.draw_rect(300, 150, 75, 75, tan);
+    s.draw_rect(450, 150, 75, 75, tan);
+
+    s.draw_rect(75, 225, 75, 75, tan);
+    s.draw_rect(225, 225, 75, 75, tan);
+    s.draw_rect(375, 225, 75, 75, tan);
+    s.draw_rect(525, 225, 75, 75, tan);
+
+    s.draw_rect(0, 300, 75, 75, tan);
+    s.draw_rect(150, 300, 75, 75, tan);
+    s.draw_rect(300, 300, 75, 75, tan);
+    s.draw_rect(450, 300, 75, 75, tan);
+
+    s.draw_rect(75, 375, 75, 75, tan);
+    s.draw_rect(225, 375, 75, 75, tan);
+    s.draw_rect(375, 375, 75, 75, tan);
+    s.draw_rect(525, 375, 75, 75, tan);
+
+    s.draw_rect(0, 450, 75, 75, tan);
+    s.draw_rect(150, 450, 75, 75, tan);
+    s.draw_rect(300, 450, 75, 75, tan);
+    s.draw_rect(450, 450, 75, 75, tan);
+
+    s.draw_rect(75, 525, 75, 75, tan);
+    s.draw_rect(225, 525, 75, 75, tan);
+    s.draw_rect(375, 525, 75, 75, tan);
+    s.draw_rect(525, 525, 75, 75, tan);
+
+    s.draw_rect(150, 600, 75, 75, tan);
+    s.draw_rect(300, 600, 75, 75, tan);
+    s.draw_rect(450, 600, 75, 75, tan);
+    s.draw_rect(600, 600, 75, 75, tan);
+
+    s.draw_string("8", 5, 0, green);
+    s.draw_string("7", 5, 75, tan);
+    s.draw_string("6", 5, 150, green);
+    s.draw_string("5", 5, 225, tan);
+    s.draw_string("4", 5, 300, green);
+    s.draw_string("3", 5, 375, tan);
+    s.draw_string("2", 5, 450, green);
+    s.draw_string("1", 5, 525, tan);
+
+    s.draw_string("h", 585, 575, green);
+    s.draw_string("g", 510, 575, tan);
+    s.draw_string("f", 435, 575, green);
+    s.draw_string("e", 360, 575, tan);
+    s.draw_string("d", 285, 575, green);
+    s.draw_string("c", 210, 575, tan);
+    s.draw_string("b", 135, 575, green);
+    s.draw_string("a", 60, 575, tan);
+
+    s.update();
 }
 
 
