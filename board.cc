@@ -323,6 +323,10 @@ void Board::killRestrict(vector<Move>& moves, char playerTurn){
 
 bool Board::move(int row1, int col1, int row2, int col2){
     vector<Move> moves = tiles[row1][col1]->findMoves(this);
+    if(tiles[row1][col1]->getPiece() == nullptr){
+        return false;
+    }
+
     if(tiles[row1][col1]->getPiece()->getColor() != getTurn()){
         return false;
     }

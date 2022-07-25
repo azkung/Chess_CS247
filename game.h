@@ -4,6 +4,7 @@
 #include <vector>
 #include "board.h"
 #include "sdl_wrap.h"
+#include "player.h"
 
 class Game{
         Board* board;
@@ -14,6 +15,9 @@ class Game{
         ~Game();
         bool makeMove();
         void drawScreen();
+
+        Player* player1;
+        Player* player2;
 
 };
 
