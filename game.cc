@@ -45,13 +45,12 @@ Game::Game(){
     
     textScreen = new TextObserver(stringBoard);
     board = new Board(textScreen);
+    drawScreen();
 }
 
 
 
 bool Game::makeMove(){
-    // cout << board->inCheckmate('w') << board->inCheckmate('b') << endl;
-    drawScreen();
     if(board->inCheckmate('w')){
         cout << "Black wins!" << endl;
         return false;
@@ -74,7 +73,6 @@ bool Game::makeMove(){
     int row1Int = 7 - (row1 - '1');
     int row2Int = 7 - (row2 - '1');
     cout << endl;
-    // cout << col1Int << " " << row1Int << " " << col2Int << " " << row2Int << endl;
 
 
     if(!board->move(row1Int, col1Int, row2Int, col2Int)){
@@ -82,7 +80,7 @@ bool Game::makeMove(){
     }
 
 
-    textScreen->printBoard();
+    drawScreen();
     return true;
 }
 
