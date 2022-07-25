@@ -17,8 +17,9 @@ class Tile : public Subject{
         Tile(int row, int col, Piece *p);
         ~Tile();
         std::string getState();
-        int getRow();
-        int getCol();
+        const int getRow();
+        const int getCol();
+        Piece* getPiece();
 
         void notifyObservers();
 

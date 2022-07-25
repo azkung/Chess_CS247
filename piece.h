@@ -5,14 +5,16 @@
 
 class Piece{
         int movesMade;
+        int lastMoved;
         char color;
         std::string name;
     public:
         Piece(char color);
         virtual ~Piece() = 0;
 
-        std::string getName();
-        int getMovesMade();
+        const std::string getName();
+        const int getMovesMade();
+        const int getLastMoved();
         void appendName(char c);
 };
 

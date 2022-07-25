@@ -10,6 +10,18 @@ class Move{
     int col;
     int prevRow;
     int prevCol;
+    bool isCastle;
+    bool isEnPassant;
+
+    public:
+        Move(int row, int col, int prevRow, int prevCol, bool isCastle, bool isEnPassant);
+        ~Move();
+        const int getRow();
+        const int getCol();
+        const int getPrevRow();
+        const int getPrevCol();
+        const bool getIsCastle();
+        const bool getIsEnPassant();
 };
 
 #endif // MOVE_H_

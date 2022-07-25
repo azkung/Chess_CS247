@@ -6,12 +6,16 @@ using namespace std;
 
 Tile::Tile(int row, int col, Piece *piece) : row(row), col(col), piece(piece) {}
 
-int Tile::getRow() {
+const int Tile::getRow() {
     return row;
 }
 
-int Tile::getCol() {
+const int Tile::getCol() {
     return col;
+}
+
+Piece* Tile::getPiece() {
+    return piece;
 }
 
 Tile::~Tile() {

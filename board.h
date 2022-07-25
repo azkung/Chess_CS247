@@ -10,6 +10,7 @@
 
 class Board{
     std::vector<std::vector<Tile*>> tiles;
+    int moveCounter;
 
     public:
         Board(TextObserver *textScreen);
