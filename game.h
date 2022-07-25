@@ -6,6 +6,7 @@
 
 class Game{
         Board* board;
+        TextObserver *textScreen;
     public:
         Game();
         ~Game();

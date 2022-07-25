@@ -12,6 +12,7 @@ class Tile : public Subject{
         int row;
         int col;
         void setPiece(Piece *p);
+        void initPiece(Piece *p);
     public:
         Tile(int row, int col, Piece *p);
         ~Tile();

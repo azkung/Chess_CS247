@@ -14,7 +14,6 @@ TextObserver::~TextObserver() {}
 void TextObserver::notify(Tile &subject){
     string state = subject.getState();
     board[subject.getRow()][subject.getCol()] = state;
-    printBoard();
 }
 
 void TextObserver::printBoard(){

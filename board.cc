@@ -12,7 +12,7 @@
 
 using namespace std;
 
-Board::Board(){
+Board::Board(TextObserver *textScreen){
 
     tiles.resize(8);
     for(int i = 0; i < 8; i++){
@@ -23,27 +23,27 @@ Board::Board(){
             tiles[i][j] = new Tile(i, j, nullptr);
         }
     }
-    tiles[0][0]->setPiece(new Rook('b'));
-    tiles[0][1]->setPiece(new Knight('b'));
-    tiles[0][2]->setPiece(new Bishop('b'));
-    tiles[0][3]->setPiece(new Queen('b'));
-    tiles[0][4]->setPiece(new King('b'));
-    tiles[0][5]->setPiece(new Bishop('b'));
-    tiles[0][6]->setPiece(new Knight('b'));
-    tiles[0][7]->setPiece(new Rook('b'));
+    tiles[0][0]->initPiece(new Rook('b'));
+    tiles[0][1]->initPiece(new Knight('b'));
+    tiles[0][2]->initPiece(new Bishop('b'));
+    tiles[0][3]->initPiece(new Queen('b'));
+    tiles[0][4]->initPiece(new King('b'));
+    tiles[0][5]->initPiece(new Bishop('b'));
+    tiles[0][6]->initPiece(new Knight('b'));
+    tiles[0][7]->initPiece(new Rook('b'));
     for(int i = 0; i < 8; i++){
-        tiles[1][i]->setPiece(new Pawn('b'));
+        tiles[1][i]->initPiece(new Pawn('b'));
     }
-    tiles[7][0]->setPiece(new Rook('w'));
-    tiles[7][1]->setPiece(new Knight('w'));
-    tiles[7][2]->setPiece(new Bishop('w'));
-    tiles[7][3]->setPiece(new Queen('w'));
-    tiles[7][4]->setPiece(new King('w'));
-    tiles[7][5]->setPiece(new Bishop('w'));
-    tiles[7][6]->setPiece(new Knight('w'));
-    tiles[7][7]->setPiece(new Rook('w'));
+    tiles[7][0]->initPiece(new Rook('w'));
+    tiles[7][1]->initPiece(new Knight('w'));
+    tiles[7][2]->initPiece(new Bishop('w'));
+    tiles[7][3]->initPiece(new Queen('w'));
+    tiles[7][4]->initPiece(new King('w'));
+    tiles[7][5]->initPiece(new Bishop('w'));
+    tiles[7][6]->initPiece(new Knight('w'));
+    tiles[7][7]->initPiece(new Rook('w'));
     for(int i = 0; i < 8; i++){
-        tiles[6][i]->setPiece(new Pawn('w'));
+        tiles[6][i]->initPiece(new Pawn('w'));
     }
 
     vector<vector<string>> board;
@@ -74,5 +74,4 @@ Board::~Board(){
             delete tiles[i][j];
         }
     }
-    delete textScreen;
 }

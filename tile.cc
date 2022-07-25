@@ -34,4 +34,9 @@ void Tile::notifyObservers() {
 
 void Tile::setPiece(Piece *p) {
     piece = p;
+    notifyObservers();
+}
+
+void Tile::initPiece(Piece *p) {
+    piece = p;
 }

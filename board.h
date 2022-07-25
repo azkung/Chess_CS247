@@ -9,11 +9,11 @@
 
 class Board{
     std::vector<std::vector<Tile*>> tiles;
-    TextObserver *textScreen;
 
     public:
-        Board();
+        Board(TextObserver *textScreen);
         ~Board();
+
 
 };
 
