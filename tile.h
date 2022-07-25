@@ -5,6 +5,8 @@
 #include "subject.h"
 #include "piece.h"
 
+class Board;
+
 class Tile : public Subject{
         Piece *piece;
         int row;
@@ -16,6 +18,8 @@ class Tile : public Subject{
         std::string getState();
         int getRow();
         int getCol();
+
+        void notifyObservers();
 
         friend Board;
 };

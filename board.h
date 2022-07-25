@@ -14,6 +14,7 @@ class Board{
     public:
         Board();
         ~Board();
+
 };
 
 #endif // BOARD_H_

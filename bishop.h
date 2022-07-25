@@ -6,7 +6,6 @@
 class Bishop : public Piece{
     public:
         Bishop(char color);
-        ~Bishop();
 };
 
 #endif // BISHOP_H_

@@ -4,13 +4,14 @@
 #include "observer.h"
 
 class Subject {
-    std::vector<Observer*> observers;
+    protected:
+        std::vector<Observer*> observers;
 
     public:
+        
         Subject();
         void attach( Observer *o );
         void detach( Observer *o );
-        void notifyObservers();
         virtual ~Subject() = 0;
 };
 

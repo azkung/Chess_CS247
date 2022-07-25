@@ -25,7 +25,13 @@ string Tile::getState() {
     if(piece == nullptr) {
         return "  ";
     }
-    
+    return piece->getName();
+}
 
-    
+void Tile::notifyObservers() {
+    for (auto ob : observers) ob->notify(*this);
+}
+
+void Tile::setPiece(Piece *p) {
+    piece = p;
 }

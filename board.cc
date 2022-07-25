@@ -7,9 +7,13 @@
 #include "queen.h"
 #include "king.h"
 #include "pawn.h"
+#include "textObserver.h"
 #include <vector>
 
+using namespace std;
+
 Board::Board(){
+
     tiles.resize(8);
     for(int i = 0; i < 8; i++){
         tiles[i].resize(8);
@@ -42,6 +46,27 @@ Board::Board(){
         tiles[6][i]->setPiece(new Pawn('w'));
     }
 
+    vector<vector<string>> board;
+    board.resize(8);
+    for(int i = 0; i < 8; i++){
+        board[i].resize(8);
+    }
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            board[i][j] = tiles[i][j]->getState();
+        }
+    }
+
+    textScreen = new TextObserver(board);
+
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            tiles[i][j]->attach(textScreen);
+        }
+    }
+
+    cout << "Welcome to Chess!" << endl;
+    textScreen->printBoard();
 }
 
 Board::~Board(){

@@ -9,7 +9,7 @@ class Game{
     public:
         Game();
         ~Game();
-        void play();
+        void makeMove();
 };
 
 

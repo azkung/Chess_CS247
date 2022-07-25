@@ -5,7 +5,6 @@
 class Rook : public Piece{
     public:
         Rook(char color);
-        
 };
 
 

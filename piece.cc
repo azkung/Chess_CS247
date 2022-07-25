@@ -14,3 +14,5 @@ void Piece::appendName(char c) {
 string Piece::getName() {
     return name;
 }
+
+Piece::~Piece() {}

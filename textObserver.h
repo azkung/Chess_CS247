@@ -10,9 +10,10 @@ class TextObserver : public Observer {
         std::vector<std::vector<std::string>> board;
 
     public:
-        TextObserver();
+        TextObserver(std::vector<std::vector<std::string>> board);
         ~TextObserver();
-        void notify(Tile &subject);
+        void notify(Tile &subject) override;
+        void printBoard();
 };
 
 #endif // TEXT_OBSERVER_H_

@@ -6,7 +6,6 @@
 class King : public Piece{
     public:
         King(char color);
-        
 };
 
 #endif // KING_H_

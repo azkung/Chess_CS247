@@ -5,17 +5,18 @@
 using namespace std;
 
 Game::Game(){
+    cout << "Welcome to Chess!" << endl;
     board = new Board();
 }
 
 
-void Game::play(){
-    while(true){
-        cout << "Enter a move: ";
-        string move;
-        cin >> move;
-        if(move == "q"){
-            break;
-        }
-    }
+void Game::makeMove(){
+    cout << "Enter a move: ";
+    string move;
+    cin >> move;
+
+}
+
+Game::~Game(){
+    delete board;
 }
