@@ -47,7 +47,16 @@ Game::Game(){
 }
 
 
-void Game::makeMove(){
+bool Game::makeMove(){
+    // cout << board->inCheckmate('w') << board->inCheckmate('b') << endl;
+    if(board->inCheckmate('w')){
+        cout << "Black wins!" << endl;
+        return false;
+    }
+    else if(board->inCheckmate('b')){
+        cout << "White wins!" << endl;
+        return false;
+    }
 
 
     cout << "Enter a move: ";
@@ -57,14 +66,17 @@ void Game::makeMove(){
     int col2Int = col2 - 'a';
     int row1Int = 7 - (row1 - '1');
     int row2Int = 7 - (row2 - '1');
-
+    cout << endl;
     // cout << col1Int << " " << row1Int << " " << col2Int << " " << row2Int << endl;
 
 
-    board->move(row1Int, col1Int, row2Int, col2Int);
+    if(!board->move(row1Int, col1Int, row2Int, col2Int)){
+        cout << "Invalid move!" << endl;
+    }
 
 
     textScreen->printBoard();
+    return true;
 }
 
 Game::~Game(){

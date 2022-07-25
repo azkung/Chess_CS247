@@ -7,8 +7,7 @@ using namespace std;
 int main(){
     Game* g = new Game();
 
-    while(true){
-        g->makeMove();
+    while(g->makeMove()){
     }
 
     delete g;

@@ -70,7 +70,6 @@ std::vector<Move> King::findMoves(int row, int col, Board *board){
             }
         }
         else{
-            std::cout << "hi";
             if(board->getPiece(7, 0) != nullptr && 
                 board->getPiece(7, 0)->getName() == "wR" && 
                 board->getPiece(7, 0)->getLastMoved() == -1 &&
