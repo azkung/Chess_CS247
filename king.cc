@@ -11,42 +11,42 @@ std::vector<Move> King::findMoves(int row, int col, Board *board){
     std::vector<Move> moves;
     if(row - 1 >= 0 && col - 1 >= 0){
         if(board->getPiece(row-1, col-1) == nullptr || board->getPiece(row - 1, col - 1)->getColor() != color){
-            moves.push_back(Move(row, col, row - 1, col - 1, false, false));
+            moves.push_back(Move(row - 1, col - 1, row, col, false, false));
         }
     }
     if(row - 1 >= 0){
         if(board->getPiece(row-1, col) == nullptr || board->getPiece(row - 1, col)->getColor() != color){
-            moves.push_back(Move(row, col, row - 1, col, false, false));
+            moves.push_back(Move(row - 1, col, row, col, false, false));
         }
     }
     if(row - 1 >= 0 && col + 1 < 8){
         if(board->getPiece(row-1, col+1) == nullptr || board->getPiece(row - 1, col + 1)->getColor() != color){
-            moves.push_back(Move(row, col, row - 1, col + 1, false, false));
+            moves.push_back(Move(row - 1, col + 1, row, col, false, false));
         }
     }
     if(col - 1 >= 0){
         if(board->getPiece(row, col-1) == nullptr || board->getPiece(row, col - 1)->getColor() != color){
-            moves.push_back(Move(row, col, row, col - 1, false, false));
+            moves.push_back(Move(row, col - 1, row, col, false, false));
         }
     }
     if(col + 1 < 8){
         if(board->getPiece(row, col+1) == nullptr || board->getPiece(row, col + 1)->getColor() != color){
-            moves.push_back(Move(row, col, row, col + 1, false, false));
+            moves.push_back(Move(row, col + 1, row, col, false, false));
         }
     }
     if(row + 1 < 8 && col - 1 >= 0){
         if(board->getPiece(row+1, col-1) == nullptr || board->getPiece(row + 1, col - 1)->getColor() != color){
-            moves.push_back(Move(row, col, row + 1, col - 1, false, false));
+            moves.push_back(Move(row + 1, col - 1, row, col, false, false));
         }
     }
     if(row + 1 < 8){
         if(board->getPiece(row+1, col) == nullptr || board->getPiece(row + 1, col)->getColor() != color){
-            moves.push_back(Move(row, col, row + 1, col, false, false));
+            moves.push_back(Move(row + 1, col, row, col, false, false));
         }
     }
     if(row + 1 < 8 && col + 1 < 8){
         if(board->getPiece(row+1, col+1) == nullptr || board->getPiece(row + 1, col + 1)->getColor() != color){
-            moves.push_back(Move(row, col, row + 1, col + 1, false, false));
+            moves.push_back(Move(row + 1, col + 1, row, col, false, false));
         }
     }
 
