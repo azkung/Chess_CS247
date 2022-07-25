@@ -14,7 +14,7 @@ class Game{
         ~Game();
         void makeMove();
         void drawScreen();
-        void updateScreen();
+        // void updateScreen();
 };
 
 
