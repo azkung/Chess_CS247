@@ -15,7 +15,7 @@ Game::Game(){
     }
     for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8; j++){
-            stringBoard[i][j] = " ";
+            stringBoard[i][j] = "__";
         }
     }
     stringBoard[0][0] = "bR";
@@ -43,19 +43,26 @@ Game::Game(){
     
     textScreen = new TextObserver(stringBoard);
     board = new Board(textScreen);
+
 }
 
 
 void Game::makeMove(){
+
+
     cout << "Enter a move: ";
     char col1, col2, row1, row2;
     cin >> col1 >> row1 >> col2 >> row2;
     int col1Int = col1 - 'a';
     int col2Int = col2 - 'a';
-    int row1Int = row1 - '1';
-    int row2Int = row2 - '1';
-    
+    int row1Int = 7 - (row1 - '1');
+    int row2Int = 7 - (row2 - '1');
 
+    // cout << col1Int << " " << row1Int << " " << col2Int << " " << row2Int << endl;
+
+
+    board->move(row1Int, col1Int, row2Int, col2Int);
+    textScreen->printBoard();
 }
 
 Game::~Game(){

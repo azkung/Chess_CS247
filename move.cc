@@ -8,3 +8,19 @@ Move::Move(int row, int col, int prevRow, int prevCol, bool isCastle, bool isEnP
     this->isCastle = isCastle;
     this->isEnPassant = isEnPassant;
 }
+
+const int Move::getCol(){
+    return this->col;
+}
+
+const int Move::getRow(){
+    return this->row;
+}
+
+const int Move::getPrevCol(){
+    return this->prevCol;
+}
+
+const int Move::getPrevRow(){
+    return this->prevRow;
+}

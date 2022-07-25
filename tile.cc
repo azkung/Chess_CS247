@@ -45,3 +45,11 @@ void Tile::setPiece(Piece *p) {
 void Tile::initPiece(Piece *p) {
     piece = p;
 }
+
+vector<Move> Tile::findMoves(Board *board) {
+    vector<Move> moves;
+    if(piece == nullptr) {
+        return moves;
+    }
+    return piece->findMoves(row, col, board);
+}

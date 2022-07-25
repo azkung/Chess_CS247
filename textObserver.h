@@ -14,6 +14,8 @@ class TextObserver : public Observer {
         ~TextObserver();
         void notify(Tile &subject) override;
         void printBoard();
+
+        std::string getState(int row, int col);
 };
 
 #endif // TEXT_OBSERVER_H_

@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <iostream>
 #include "tile.h"
 #include "piece.h"
 #include "observer.h"
@@ -7,7 +8,7 @@
 
 using namespace std;
 
-TextObserver::TextObserver(std::vector<std::vector<std::string>> board) : board(board) {}
+TextObserver::TextObserver(std::vector<std::vector<std::string>> board) : board{board} {}
 
 TextObserver::~TextObserver() {}
 
@@ -25,4 +26,8 @@ void TextObserver::printBoard(){
         cout << endl;
     }
     cout << "  a  b  c  d  e  f  g  h" << endl;
+}
+
+std::string TextObserver::getState(int row, int col){
+    return board[row][col];
 }

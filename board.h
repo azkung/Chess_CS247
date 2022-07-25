@@ -22,6 +22,7 @@ class Board{
         std::vector<Move> findMoves(int row, int col);
         Piece* getPiece(int row, int col);
         int getMoveCounter();
+        void move(int row, int col, int newRow, int newCol);
 
 };
 

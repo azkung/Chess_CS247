@@ -2,11 +2,14 @@
 #define TILE_H_
 #include <iostream>
 #include <string>
+#include <vector>
 #include "subject.h"
 #include "piece.h"
+#include "move.h"
 
 class Board;
 class Piece;
+class Move;
 
 class Tile : public Subject{
         Piece *piece;
@@ -21,6 +24,8 @@ class Tile : public Subject{
         const int getRow();
         const int getCol();
         Piece* getPiece();
+
+        std::vector<Move> findMoves(Board *board);
 
         void notifyObservers();
 

@@ -58,8 +58,6 @@ Board::Board(TextObserver *textScreen) : moveCounter{0} {
         }
     }
 
-    textScreen = new TextObserver(board);
-
     for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8; j++){
             tiles[i][j]->attach(textScreen);
@@ -83,4 +81,30 @@ Piece* Board::getPiece(int row, int col){
 
 int Board::getMoveCounter(){
     return moveCounter;
+}
+
+void Board::move(int row1, int col1, int row2, int col2){
+    vector<Move> moves = tiles[row1][col1]->findMoves(this);
+
+    Piece* piece1 = tiles[row1][col1]->getPiece();
+    Piece* piece2 = tiles[row2][col2]->getPiece();
+    bool found = false;
+    for(int i = 0; i < moves.size(); i++){
+        if(moves[i].getPrevRow() == row1 && moves[i].getPrevCol() == col1 && moves[i].getRow() == row2 && moves[i].getCol() == col2){
+            found = true;
+            break;
+        }
+    }
+    if(found){
+        if(piece2 != nullptr){
+            delete piece2;
+            tiles[row2][col2]->initPiece(piece1);
+        }
+        tiles[row1][col1]->setPiece(nullptr);
+        tiles[row2][col2]->setPiece(piece1);
+        moveCounter++;
+    }
+    else{
+        cout << "Invalid move" << endl;
+    }
 }
