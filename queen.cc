@@ -1,5 +1,3 @@
-
-
 #include "queen.h"
 #include "board.h"
 #include "move.h"

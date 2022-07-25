@@ -61,7 +61,11 @@ bool Game::makeMove(){
 
     cout << "Enter a move: ";
     char col1, col2, row1, row2;
-    cin >> col1 >> row1 >> col2 >> row2;
+    cin >> col1;
+    if(col1 == 'x'){
+        return false;
+    }
+    cin >> row1 >> col2 >> row2;
     int col1Int = col1 - 'a';
     int col2Int = col2 - 'a';
     int row1Int = 7 - (row1 - '1');

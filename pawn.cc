@@ -26,12 +26,12 @@ vector<Move> Pawn::findMoves(int row, int col, Board *board){
         }
         if(row == 3){
             if(col-1 >= 0){
-                if(board->getPiece(row, col - 1) != nullptr && board->getPiece(row, col-1)->getName() == "bp" && board->getPiece(row, col-1)->getLastMoved() == board->getMoveCounter()-1){
+                if(board->getPiece(row, col - 1) != nullptr && board->getPiece(row, col-1)->getName() == "bP" && board->getPiece(row, col-1)->getLastMoved() == board->getMoveCounter()-1){
                     moves.push_back(Move(row - 1, col - 1, row, col, false, true));
                 }
             }
             if(col+1 < 8){
-                if(board->getPiece(row, col + 1) != nullptr && board->getPiece(row, col+1)->getName() == "bp" && board->getPiece(row, col+1)->getLastMoved() == board->getMoveCounter()-1){
+                if(board->getPiece(row, col + 1) != nullptr && board->getPiece(row, col+1)->getName() == "bP" && board->getPiece(row, col+1)->getLastMoved() == board->getMoveCounter()-1){
                     moves.push_back(Move(row - 1, col + 1, row, col, false, true));
                 }
             }
@@ -52,12 +52,12 @@ vector<Move> Pawn::findMoves(int row, int col, Board *board){
         }
         if(row == 4){
             if(col-1 >= 0){
-                if(board->getPiece(row, col - 1) != nullptr && board->getPiece(row, col-1)->getName() == "wp" && board->getPiece(row, col-1)->getLastMoved() == board->getMoveCounter()-1){
+                if(board->getPiece(row, col - 1) != nullptr && board->getPiece(row, col-1)->getName() == "wP" && board->getPiece(row, col-1)->getLastMoved() == board->getMoveCounter()-1){
                     moves.push_back(Move(row + 1, col - 1, row, col, false, true));
                 }
             }
             if(col+1 < 8){
-                if(board->getPiece(row, col + 1) != nullptr && board->getPiece(row, col+1)->getName() == "wp" && board->getPiece(row, col+1)->getLastMoved() == board->getMoveCounter()-1){
+                if(board->getPiece(row, col + 1) != nullptr && board->getPiece(row, col+1)->getName() == "wP" && board->getPiece(row, col+1)->getLastMoved() == board->getMoveCounter()-1){
                     moves.push_back(Move(row + 1, col + 1, row, col, false, true));
                 }
             }

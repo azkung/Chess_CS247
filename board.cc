@@ -206,7 +206,7 @@ bool Board::inCheck(char playerTurn){
 }
 
 bool Board::inCheckmate(char playerTurn){
-    // returns whether playerTurn is in chceck
+    // returns whether playerTurn is in checkmate
     vector<vector<string>> temp;
     TextObserver* t =  new TextObserver(temp);
     if(inCheck(playerTurn)){
@@ -268,7 +268,10 @@ void Board::killRestrict(vector<Move>& moves, char playerTurn){
                     tempBoard.tiles[row2][7]->setPiece(nullptr);
                 }
             }
-
+            if(moves[i].getIsEnPassant()){
+                delete tempBoard.tiles[row1][col2]->getPiece();
+                tempBoard.tiles[row1][col2]->initPiece(nullptr);
+            }
             if(tempBoard.inCheck('w')){
                 moves.erase(moves.begin() + i);
                 i--;
@@ -303,6 +306,10 @@ void Board::killRestrict(vector<Move>& moves, char playerTurn){
                     tempBoard.tiles[row2][5]->getPiece()->setLastMoved(moveCounter);
                     tempBoard.tiles[row2][7]->setPiece(nullptr);
                 }
+            }
+            if(moves[i].getIsEnPassant()){
+                delete tempBoard.tiles[row1][col2]->getPiece();
+                tempBoard.tiles[row1][col2]->initPiece(nullptr);
             }
             if(tempBoard.inCheck('b')){
                 moves.erase(moves.begin() + i);
@@ -355,6 +362,10 @@ bool Board::move(int row1, int col1, int row2, int col2){
                 tiles[row2][5]->getPiece()->setLastMoved(moveCounter);
                 tiles[row2][7]->setPiece(nullptr);
             }
+        }
+        if(moves[index].getIsEnPassant()){
+            delete tiles[row1][col2]->getPiece();
+            tiles[row1][col2]->setPiece(nullptr);
         }
 
         moveCounter++;
