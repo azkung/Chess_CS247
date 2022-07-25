@@ -6,6 +6,7 @@
 #include "piece.h"
 
 class Board;
+class Piece;
 
 class Tile : public Subject{
         Piece *piece;

@@ -1,4 +1,5 @@
 #include "tile.h"
+#include "piece.h"
 #include <string>
 
 using namespace std;

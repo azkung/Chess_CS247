@@ -23,4 +23,10 @@ const int Piece::getLastMoved() {
     return lastMoved;
 }
 
+const char Piece::getColor() {
+    return color;
+}
+
+Piece::Piece(const Piece &other) : color{other.color}, movesMade{other.movesMade}, lastMoved{other.lastMoved}, name{other.name} {}
+
 Piece::~Piece() {}

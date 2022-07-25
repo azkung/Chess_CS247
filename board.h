@@ -7,6 +7,10 @@
 #include "tile.h"
 #include "textObserver.h"
 #include "move.h"
+#include "piece.h"
+
+class Piece;
+class Move;
 
 class Board{
     std::vector<std::vector<Tile*>> tiles;
@@ -16,6 +20,8 @@ class Board{
         Board(TextObserver *textScreen);
         ~Board();
         std::vector<Move> findMoves(int row, int col);
+        Piece* getPiece(int row, int col);
+        int getMoveCounter();
 
 };
 
