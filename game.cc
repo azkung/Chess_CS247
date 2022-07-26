@@ -289,6 +289,7 @@ void Game::drawScreen() {
     }
 
     s.update();
+    textScreen->printBoard();
 }
 
 Game::~Game(){
