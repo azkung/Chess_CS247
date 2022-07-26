@@ -19,18 +19,22 @@ int main(){
 
         while(true){
             if (!(g->makeMove())) {
-                if (g->getWinner()) {
-                    white.addWin();
-                } else {
-                    black.addWin();
-                }
-                
                 cout << "Play again? [Yes] or [No]" << endl;
                 cin >> cmd;
 
                 if (cmd == "No") {
+                    if (g->getWinner()) {
+                        white.addWin();
+                    } else {
+                        black.addWin();
+                    }
                     break;
                 } else if (cmd == "Yes") {
+                    if (g->getWinner()) {
+                        white.addWin();
+                    } else {
+                        black.addWin();
+                    }
                     delete g;
                     g = new Game();
                 } else {
