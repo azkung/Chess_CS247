@@ -95,7 +95,15 @@ void Game::initPlayers(char p1, char p2){
 }
 
 bool Game::makeMove(){
-    if(board->inCheckmate('w')){
+    if(board->inStalemate('w')){
+        cout << "Stalemate!" << endl;
+        return false;
+    }
+    else if(board->inStalemate('b')){
+        cout << "Stalemate!" << endl;
+        return false;
+    }
+    else if(board->inCheckmate('w')){
         cout << "Black wins!" << endl;
         return false;
     }
@@ -128,12 +136,26 @@ bool Game::makeMove(){
     return true;
 }
 
-bool Game::getWinner() {
-    return !board->inCheckmate('w');
+char Game::getWinner() {
+    if(board->inStalemate('w')){
+        return ' ';
+    }
+    else if(board->inStalemate('b')){
+        return ' ';
+    }
+    else if(board->inCheckmate('w')){
+        return 'b';
+    }
+    else if(board->inCheckmate('b')){
+        return 'w';
+    }
+    else{
+        return ' ';
+    }
 }
 
 bool Game::gameEnded() {
-    return (board->inCheckmate('w') || board->inCheckmate('b'));
+    return (board->inStalemate('w') || board->inStalemate('b') || board->inCheckmate('w') || board->inCheckmate('b'));
 }
 
 char Game::currTurn() {

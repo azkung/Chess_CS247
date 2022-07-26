@@ -28,6 +28,7 @@ class Board{
         void killRestrict(std::vector<Move> &moves, char playerTurn);
         bool inCheck(char playerTurn);
         bool inCheckmate(char playerTurn);
+        bool inStalemate(char playerTurn);
         Piece* getPiece(int row, int col);
         int getMoveCounter();
         std::vector<Move> getAllMoves(char color);

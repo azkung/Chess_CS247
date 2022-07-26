@@ -14,7 +14,7 @@ vector<Move> Pawn::findMoves(int row, int col, Board *board){
     if(color == 'w'){
         if(row - 1 >= 0 && board->getPiece(row - 1, col) == nullptr){
             moves.push_back(Move(row - 1, col, row, col, false, false));
-            if(lastMoved == -1 && board->getPiece(row - 2, col) == nullptr){
+            if(row - 2 >= 0 && lastMoved == -1 && board->getPiece(row - 2, col) == nullptr){
                 moves.push_back(Move(row - 2, col, row, col, false, false));
             }
         }
@@ -40,7 +40,7 @@ vector<Move> Pawn::findMoves(int row, int col, Board *board){
     else{
         if(row + 1 < 8 && board->getPiece(row + 1, col) == nullptr){
             moves.push_back(Move(row + 1, col, row, col, false, false));
-            if(lastMoved == -1 && board->getPiece(row + 2, col) == nullptr){
+            if(row - 2 >= 0 && lastMoved == -1 && board->getPiece(row + 2, col) == nullptr){
                 moves.push_back(Move(row + 2, col, row, col, false, false));
             }
         }

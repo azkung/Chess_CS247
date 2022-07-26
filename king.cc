@@ -4,6 +4,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 King::King(char color) : Piece(color) {appendName('K');}
 
 

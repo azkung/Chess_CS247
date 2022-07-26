@@ -2,6 +2,7 @@
 #include "piece.h"
 #include <string>
 #include "queen.h"
+#include "move.h"
 
 using namespace std;
 

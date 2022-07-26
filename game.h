@@ -22,7 +22,7 @@ class Game{
 
         bool makeMove();
         void drawScreen();
-        bool getWinner();
+        char getWinner();
         bool gameEnded();
 
         bool boardIsValid();

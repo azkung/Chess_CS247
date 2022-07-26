@@ -207,7 +207,6 @@ bool Board::inCheck(char playerTurn){
 bool Board::inCheckmate(char playerTurn){
     // returns whether playerTurn is in checkmate
     vector<vector<string>> temp;
-    TextObserver* t =  new TextObserver(temp);
     if(inCheck(playerTurn)){
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
@@ -216,17 +215,14 @@ bool Board::inCheckmate(char playerTurn){
                         vector<Move> moves = tiles[i][j]->findMoves(this);
                         killRestrict(moves, playerTurn);
                         if(moves.size() > 0){
-                            delete t;
                             return false;
                         }
                     }
                 }
             }
         }
-        delete t;
         return true;
     }
-    delete t;
     return false;
     
 }
@@ -287,15 +283,18 @@ void Board::killRestrict(vector<Move>& moves, char playerTurn){
             int col2 = moves[i].getCol();
             Board tempBoard = Board(*this, t);
 
+
             Piece* piece1 = tempBoard.getPiece(row1, col1);
             Piece* piece2 = tempBoard.getPiece(row2, col2);
             if(piece2 != nullptr){
                 delete piece2;
                 tempBoard.tiles[row2][col2]->initPiece(piece1);
             }
+
             piece1->setLastMoved(moveCounter);
             tempBoard.tiles[row1][col1]->setPiece(nullptr);
             tempBoard.tiles[row2][col2]->setPiece(piece1);
+
             if(moves[i].getIsCastle()){
                 if(moves[i].getCol() == 2){
                     tempBoard.tiles[row2][3]->setPiece(tempBoard.tiles[row2][0]->getPiece());
@@ -404,6 +403,14 @@ char Board::getTurn(){
         return 'w';
     }
     return 'b';
+}
+
+bool Board::inStalemate(char playerTurn){
+    vector<Move> moves = getAllMoves(playerTurn);
+    if(moves.size() == 0 && !inCheck(playerTurn)){
+        return true;
+    }
+    return false;
 }
 
 

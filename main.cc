@@ -39,11 +39,13 @@ int main(){
                 if(g != nullptr && playersInitialized){
                     if (g->currTurn() == 'b') {
                         whiteWins++;
-                        cout << "White wins!" << endl;
+                        cout << "White wins! Enter anything to continue" << endl;
                     } else {
                         blackWins++;
-                        cout << "Black wins!" << endl;
+                        cout << "Black wins! Enter anything to continue" << endl;
                     }
+                    string temp;
+                    cin >> temp;
                     delete g;
                     g = nullptr;
                     playersInitialized = false;
@@ -56,14 +58,19 @@ int main(){
                 if(g != nullptr){
                     g->makeMove();
                     if (g->gameEnded()) {
-                        if (g->getWinner()) {
+                        if (g->getWinner() == 'w') {
                             whiteWins++;
-                            cout << "White wins!" << endl;
+                            cout << "White wins! Enter anything to continue" << endl;
                         }
-                        else {
+                        else if(g->getWinner() == 'b'){
                             blackWins++;
-                            cout << "Black wins!" << endl;
+                            cout << "Black wins! Enter anything to continue" << endl;
                         }
+                        else{
+                            cout << "Draw! Enter anything to continue" << endl;
+                        }
+                        string temp;
+                        cin >> temp;
                         delete g;
                         g = nullptr;
                         playersInitialized = false;
@@ -105,14 +112,14 @@ int main(){
                                 cout << "Invalid location" << endl;
                             }
                             else{
-                                g->removePiece(colInt, rowInt);
+                                g->removePiece(rowInt, colInt);
                             }
                             g->drawScreen();
                         }
                         else if(cmd == "="){
                             char color;
                             cin >> color;
-                            if(!(color == 'w' || color == 'b')){
+                            if((color == 'w' || color == 'b')){
                                 g->setTurn(color);
                             }
                             else{
@@ -122,6 +129,25 @@ int main(){
                         }
                         else if(cmd == "done"){
                             if(g->boardIsValid()){
+                                if(g->gameEnded()){
+                                    if (g->getWinner() == 'w') {
+                                        whiteWins++;
+                                        cout << "White wins! Enter anything to continue" << endl;
+                                    }
+                                    else if(g->getWinner() == 'b'){
+                                        blackWins++;
+                                        cout << "Black wins! Enter anything to continue" << endl;
+                                    }
+                                    else{
+                                        cout << "Draw! Enter anything to continue" << endl;
+                                    }
+                                    string temp;
+                                    cin >> temp;
+                                    g->initPlayers('h','h');
+                                    delete g;
+                                    g = nullptr;
+                                    playersInitialized = false;
+                                }
                                 break;
                             }
                             else{
