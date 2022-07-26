@@ -72,48 +72,49 @@ using namespace std;
 
 float Level4Bot::evaluate(Board *board){
     float score = 0;
+    float totalPieces = 0;
     for (int i = 0; i < 8; i++){
         for (int j = 0; j < 8; j++){
             if (board->getPiece(i, j) != nullptr){
+                totalPieces++;
                 if(board->getPiece(i, j)->getName() == "wP"){
-                    score += 4;
+                    score += 8;
+                    score += ((float)(6-i))/2;
                 }
                 else if(board->getPiece(i, j)->getName() == "wR"){
-                    score += 20;
+                    score += 40;
                 }
                 else if(board->getPiece(i, j)->getName() == "wN"){
-                    score += 12;
+                    score += 24;
                 }
                 else if(board->getPiece(i, j)->getName() == "wB"){
-                    score += 12;
+                    score += 24;
                 }
                 else if(board->getPiece(i, j)->getName() == "wQ"){
-                    score += 32;
+                    score += 64;
                 }
                 else if(board->getPiece(i, j)->getName() == "bP"){
-                    score -= 4;
+                    score -= 8;
+                    score -= ((float)(i-1))/2;
                 }
                 else if(board->getPiece(i, j)->getName() == "bR"){
-                    score -= 20;
+                    score -= 40;
                 }
                 else if(board->getPiece(i, j)->getName() == "bN"){
-                    score -= 12;
+                    score -= 24;
                 }
                 else if(board->getPiece(i, j)->getName() == "bB"){
-                    score -= 12;
+                    score -= 24;
                 }
                 else if(board->getPiece(i, j)->getName() == "bQ"){
-                    score -= 32;
-                }
-                if(board->inCheck('w')){
-                    score -= 50;
-                }
-                if(board->inCheck('b')){
-                    score += 50;
+                    score -= 64;
                 }
             }
         }
     }
+    score += (((float)board->getAllMoves('w').size())/20);
+    score -= (((float)board->getAllMoves('b').size())/20);
+    score = score * ((34-totalPieces)/10);
     return score;
 }
 
@@ -178,11 +179,17 @@ std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, f
 
 }
 
-Level4Bot::Level4Bot(char color) : Bot(color) {
+Level4Bot::Level4Bot(char color) : Bot(color), movesMade{0} {
 }
 
 
 Move Level4Bot::getMove(Board *board){
+    if(movesMade < 1){
+        movesMade++;
+        srand (time(NULL));
+        int randomChoice = rand() % board->getAllMoves(color).size();
+        return board->getAllMoves(color)[randomChoice];
+    }
     std::pair<float, Move> temp = minimax(board, color, 3, std::numeric_limits<float>::lowest(), std::numeric_limits<float>::max());
     return temp.second;
 }

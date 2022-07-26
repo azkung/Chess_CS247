@@ -59,7 +59,6 @@ Move Level2Bot::getMove(Board *board) {
     }
 
     if(allSameScore){
-        int row, col;
         srand (time(NULL));
         int randomChoice = rand() % allMoves.size();
         bestMove = allMoves[randomChoice];

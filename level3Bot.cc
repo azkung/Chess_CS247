@@ -34,7 +34,7 @@ Move Level3Bot::getMove(Board *board) {
         if(color == 'w'){
             vector<Move> allOtherMoves = tempBoard.getAllMoves('b');
             if(tempBoard.inCheck('b')){
-                score -= 1;
+                score += 5;
             }
             for(int j = 0; j < allOtherMoves.size(); j++){
                 if(allOtherMoves[j].getRow() == allMoves[i].getRow() && allOtherMoves[j].getCol() == allMoves[i].getCol()){
@@ -46,7 +46,6 @@ Move Level3Bot::getMove(Board *board) {
                     allSameScore = false;
                 }
             }
-
             if(score > bestScore){
                 bestScore = score;
                 bestMove = allMoves[i];
@@ -55,7 +54,7 @@ Move Level3Bot::getMove(Board *board) {
         else{
             vector<Move> allOtherMoves = tempBoard.getAllMoves('w');
             if(tempBoard.inCheck('w')){
-                score -= 1;
+                score += 5;
             }
             for(int j = 0; j < allOtherMoves.size(); j++){
                 if(allOtherMoves[j].getRow() == allMoves[i].getRow() && allOtherMoves[j].getCol() == allMoves[i].getCol()){
@@ -67,7 +66,6 @@ Move Level3Bot::getMove(Board *board) {
                     allSameScore = false;
                 }
             }
-
             if(score > bestScore){
                 bestScore = score;
                 bestMove = allMoves[i];
@@ -76,7 +74,6 @@ Move Level3Bot::getMove(Board *board) {
         delete t;
     }
     if(allSameScore){
-        int row, col;
         srand (time(NULL));
         int randomChoice = rand() % allMoves.size();
         bestMove = allMoves[randomChoice];
