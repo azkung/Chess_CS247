@@ -1,6 +1,6 @@
 #include "player.h"
 
 
-class Player{
+Player::Player(char color) : color{color} {}
 
-};
+Player::~Player() {}

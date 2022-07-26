@@ -15,6 +15,7 @@ class Move;
 class Board{
     std::vector<std::vector<Tile*>> tiles;
     int moveCounter;
+    std::vector<Move> movesMade;
 
 
     public:

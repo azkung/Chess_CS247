@@ -267,11 +267,13 @@ void Board::killRestrict(vector<Move>& moves, char playerTurn){
                     tempBoard.tiles[row2][5]->getPiece()->setLastMoved(moveCounter);
                     tempBoard.tiles[row2][7]->setPiece(nullptr);
                 }
-            }
+            }            
             if(moves[i].getIsEnPassant()){
                 delete tempBoard.tiles[row1][col2]->getPiece();
                 tempBoard.tiles[row1][col2]->initPiece(nullptr);
             }
+            tempBoard.moveCounter++;
+            tempBoard.movesMade.push_back(moves[i]);
             if(tempBoard.inCheck('w')){
                 moves.erase(moves.begin() + i);
                 i--;
@@ -311,6 +313,8 @@ void Board::killRestrict(vector<Move>& moves, char playerTurn){
                 delete tempBoard.tiles[row1][col2]->getPiece();
                 tempBoard.tiles[row1][col2]->initPiece(nullptr);
             }
+            tempBoard.moveCounter++;
+            tempBoard.movesMade.push_back(moves[i]);
             if(tempBoard.inCheck('b')){
                 moves.erase(moves.begin() + i);
                 i--;
@@ -372,6 +376,7 @@ bool Board::move(int row1, int col1, int row2, int col2){
             tiles[row1][col2]->setPiece(nullptr);
         }
 
+        movesMade.push_back(moves[index]);
         moveCounter++;
         return true;
     }
