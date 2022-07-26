@@ -17,6 +17,11 @@ using namespace std;
 Level3Bot::Level3Bot(char color) : Bot(color) {}
 
 Move Level3Bot::getMove(Board *board) {
+    string cmd;
+    cin >> cmd;
+    if(cmd != "move"){
+        return Move();
+    }
     int row, col;
     srand (time(NULL));
     

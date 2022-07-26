@@ -3,6 +3,15 @@
 #include <iostream>
 #include "textObserver.h"
 #include <vector>
+#include "bot.h"
+#include "player.h"
+#include "move.h"
+#include "level1Bot.h"
+#include "level3Bot.h"
+#include "level2Bot.h"
+#include "level4Bot.h"
+#include "human.h"
+
 
 using namespace std;
 
@@ -47,7 +56,38 @@ Game::Game(){
     drawScreen();
 }
 
-
+void Game::initPlayers(char p1, char p2){
+    if(p1 == 'h'){
+        player1 = new Human('w');
+    }
+    else if(p1 == '1'){
+        player1 = new Level1Bot('w');
+    }
+    else if(p1 == '2'){
+        player1 = new Level2Bot('w');
+    }
+    else if(p1 == '3'){
+        player1 = new Level3Bot('w');
+    }
+    else if(p1 == '4'){
+        player1 = new Level4Bot('w');
+    }
+    if(p2 == 'h'){
+        player2 = new Human('b');
+    }
+    else if(p2 == '1'){
+        player2 = new Level1Bot('b');
+    }
+    else if(p2 == '2'){
+        player2 = new Level2Bot('b');
+    }
+    else if(p2 == '3'){
+        player2 = new Level3Bot('b');
+    }
+    else if(p2 == '4'){
+        player2 = new Level4Bot('b');
+    }
+}
 
 bool Game::makeMove(){
     if(board->inCheckmate('w')){
@@ -58,25 +98,44 @@ bool Game::makeMove(){
         cout << "White wins!" << endl;
         return false;
     }
-
-
-    // cout << "Enter a move: ";
-    char col1, col2, row1, row2;
-    cin >> col1;
-    if(col1 == 'x'){
-        return false;
+    
+    
+    if(getTurn() == 'w'){
+        Move move = player1->getMove(board);
+        if(move.getPrevCol() == -1){
+            cout << "Invalid move" << endl;
+        }
+        else if(!board->move(move.getPrevRow(), move.getPrevCol(), move.getRow(), move.getCol())){
+            cout << "Invalid move" << endl;
+        }
     }
-    cin >> row1 >> col2 >> row2;
-    int col1Int = col1 - 'a';
-    int col2Int = col2 - 'a';
-    int row1Int = 7 - (row1 - '1');
-    int row2Int = 7 - (row2 - '1');
-    cout << endl;
-
-
-    if(!board->move(row1Int, col1Int, row2Int, col2Int)){
-        cout << "Invalid move!" << endl;
+    else{
+        Move move = player2->getMove(board);
+        if(move.getPrevCol() == -1){
+            cout << "Invalid move" << endl;
+        }
+        else if(!board->move(move.getPrevRow(), move.getPrevCol(), move.getRow(), move.getCol())){
+            cout << "Invalid move" << endl;
+        }
     }
+
+    // // cout << "Enter a move: ";
+    // char col1, col2, row1, row2;
+    // cin >> col1;
+    // if(col1 == 'x'){
+    //     return false;
+    // }
+    // cin >> row1 >> col2 >> row2;
+    // int col1Int = col1 - 'a';
+    // int col2Int = col2 - 'a';
+    // int row1Int = 7 - (row1 - '1');
+    // int row2Int = 7 - (row2 - '1');
+    // cout << endl;
+
+
+    // if(!board->move(row1Int, col1Int, row2Int, col2Int)){
+    //     cout << "Invalid move!" << endl;
+    // }
 
 
     drawScreen();
@@ -225,5 +284,7 @@ void Game::drawScreen() {
 }
 
 Game::~Game(){
+    delete player1;
+    delete player2;
     delete board;
 }

@@ -10,8 +10,6 @@ class Human : public Player {
     public:
         Human(char color);
         
-        void addWin();
-        int getScore();
         Move getMove(Board *board);
 };
 

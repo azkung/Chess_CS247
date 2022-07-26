@@ -1,6 +1,7 @@
 #include "level1Bot.h"
 #include "move.h"
 
+#include <iostream>
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
@@ -12,6 +13,11 @@ using namespace std;
 Level1Bot::Level1Bot(char color) : Bot(color) {}
 
 Move Level1Bot::getMove(Board *board) {
+    string cmd;
+    cin >> cmd;
+    if(cmd != "move"){
+        return Move();
+    }
     int row, col;
     srand (time(NULL));
 

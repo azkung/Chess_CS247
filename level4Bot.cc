@@ -112,6 +112,11 @@ Level4Bot::Level4Bot(char color) : Bot(color) {
 
 
 Move Level4Bot::getMove(Board *board){
+    string cmd;
+    cin >> cmd;
+    if(cmd != "move"){
+        return Move();
+    }
     std::pair<float, Move> temp = minimax(board, color, 4, std::numeric_limits<float>::lowest(), std::numeric_limits<float>::max());
     return temp.second;
 }

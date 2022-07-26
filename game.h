@@ -13,6 +13,9 @@ class Game{
     public:
         Game();
         ~Game();
+
+        void initPlayers(char p1, char p2);
+
         bool makeMove();
         void drawScreen();
         bool getWinner();
