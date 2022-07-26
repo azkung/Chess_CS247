@@ -62,7 +62,7 @@ int main(){
             }
             else if(cmd == "setup"){
                 if(g != nullptr){
-                    cout << "Game in Progress, setup not possible" << end;
+                    cout << "Game in Progress, setup not possible" << endl;
                 }
                 else{
                     g = new Game();
@@ -72,27 +72,29 @@ int main(){
                             char col;
                             char row;
                             cin >> name >> col >> row;
-                            int colInt = col1 - 'a';
-                            int rowInt = 7 - (row1 - '1');
+                            int colInt = col - 'a';
+                            int rowInt = 7 - (row - '1');
                             if(!(colInt >= 0 && colInt < 8 && rowInt >= 0 && rowInt < 8)){
                                 cout << "Invalid location" << endl;
                             }
                             else{
-                                g->setPiece(name, colInt, rowInt);
+                                g->setPiece(rowInt, colInt, name);
                             }
+                            g->drawScreen();
                         }
                         else if(cmd == "-"){
                             char col;
                             char row;
                             cin >> col >> row;
-                            int colInt = col1 - 'a';
-                            int rowInt = 7 - (row1 - '1');
+                            int colInt = col - 'a';
+                            int rowInt = 7 - (row - '1');
                             if(!(colInt >= 0 && colInt < 8 && rowInt >= 0 && rowInt < 8)){
                                 cout << "Invalid location" << endl;
                             }
                             else{
                                 g->removePiece(colInt, rowInt);
                             }
+                            g->drawScreen();
                         }
                         else if(cmd == "="){
                             char color;
@@ -103,6 +105,7 @@ int main(){
                             else{
                                 cout << "Invalid color" << endl;
                             }
+                            g->drawScreen();
                         }
                         else if(cmd == "done"){
                             if(g->boardIsValid()){

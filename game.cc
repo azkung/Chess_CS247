@@ -11,7 +11,12 @@
 #include "level2Bot.h"
 #include "level4Bot.h"
 #include "human.h"
-
+#include "rook.h"
+#include "bishop.h"
+#include "king.h"
+#include "queen.h"
+#include "pawn.h"
+#include "knight.h"
 
 using namespace std;
 
@@ -100,7 +105,7 @@ bool Game::makeMove(){
     }
     
     
-    if(getTurn() == 'w'){
+    if(board->getTurn() == 'w'){
         Move move = player1->getMove(board);
         if(move.getPrevCol() == -1){
             cout << "Invalid move" << endl;

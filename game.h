@@ -16,7 +16,7 @@ class Game{
 
         void initPlayers(char p1, char p2);
 
-        void setPiece(int row, int col, string piece);
+        void setPiece(int row, int col, std::string piece);
         void removePiece(int x, int y);
         void setTurn(char turn);
 
