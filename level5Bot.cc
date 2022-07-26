@@ -6,19 +6,22 @@
 #include <math.h>
 
 #include "board.h"
-#include "level4Bot.h"
+#include "level5Bot.h"
 #include "move.h"
 #include "textObserver.h"
 
 using namespace std;
 
-float Level4Bot::evaluate(Board* board){
+float Level5Bot::evaluate(Board *board){
     float score = 0;
+    float totalPieces = 0;
     for (int i = 0; i < 8; i++){
         for (int j = 0; j < 8; j++){
             if (board->getPiece(i, j) != nullptr){
+                totalPieces++;
                 if(board->getPiece(i, j)->getName() == "wP"){
                     score += 8;
+                    score += ((float)(6-i))/2;
                 }
                 else if(board->getPiece(i, j)->getName() == "wR"){
                     score += 40;
@@ -34,6 +37,7 @@ float Level4Bot::evaluate(Board* board){
                 }
                 else if(board->getPiece(i, j)->getName() == "bP"){
                     score -= 8;
+                    score -= ((float)(i-1))/2;
                 }
                 else if(board->getPiece(i, j)->getName() == "bR"){
                     score -= 40;
@@ -50,10 +54,13 @@ float Level4Bot::evaluate(Board* board){
             }
         }
     }
+    score += (((float)board->getAllMoves('w').size())/20);
+    score -= (((float)board->getAllMoves('b').size())/20);
+    score = score * ((34-totalPieces)/10);
     return score;
 }
 
-std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, float alpha, float beta){
+std::pair<float, Move> Level5Bot::minimax(Board *board, char color, int depth, float alpha, float beta){
     std::vector<std::vector<std::string>> stringboard;
     if(board->inCheckmate(color)){
         if(color == 'w'){
@@ -114,12 +121,12 @@ std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, f
 
 }
 
-Level4Bot::Level4Bot(char color) : Bot(color), movesMade{0} {
+Level5Bot::Level5Bot(char color) : Bot(color), movesMade{0} {
 }
 
 
-Move Level4Bot::getMove(Board *board){
-    if(movesMade < 2){
+Move Level5Bot::getMove(Board *board){
+    if(movesMade < 1){
         movesMade++;
         srand (time(NULL));
         int randomChoice = rand() % board->getAllMoves(color).size();

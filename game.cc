@@ -10,6 +10,7 @@
 #include "level3Bot.h"
 #include "level2Bot.h"
 #include "level4Bot.h"
+#include "level5Bot.h"
 #include "human.h"
 #include "rook.h"
 #include "bishop.h"
@@ -77,6 +78,9 @@ void Game::initPlayers(char p1, char p2){
     else if(p1 == '4'){
         player1 = new Level4Bot('w');
     }
+    else if(p1 == '5'){
+        player1 = new Level5Bot('w');
+    }
     if(p2 == 'h'){
         player2 = new Human('b');
     }
@@ -91,6 +95,9 @@ void Game::initPlayers(char p1, char p2){
     }
     else if(p2 == '4'){
         player2 = new Level4Bot('b');
+    }
+    else if(p2 == '5'){
+        player2 = new Level5Bot('b');
     }
 }
 
