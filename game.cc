@@ -60,7 +60,7 @@ bool Game::makeMove(){
     }
 
 
-    cout << "Enter a move: ";
+    // cout << "Enter a move: ";
     char col1, col2, row1, row2;
     cin >> col1;
     if(col1 == 'x'){
@@ -85,6 +85,14 @@ bool Game::makeMove(){
 
 bool Game::getWinner() {
     return !board->inCheckmate('w');
+}
+
+bool Game::gameEnded() {
+    return (board->inCheckmate('w') || board->inCheckmate('b'));
+}
+
+char Game::currTurn() {
+    return board->getTurn();
 }
 
 

@@ -16,6 +16,9 @@ class Game{
         bool makeMove();
         void drawScreen();
         bool getWinner();
+        bool gameEnded();
+
+        char currTurn();
 
         Player* player1;
         Player* player2;

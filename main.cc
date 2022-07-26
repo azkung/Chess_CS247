@@ -18,10 +18,20 @@ int main(){
         Game* g = new Game();
 
         while(true){
-            if (!(g->makeMove())) {
+            cin >> cmd; 
+
+            if (cmd == "resign") {
+                if (g->currTurn() == 'b') {
+                    white.addWin();
+                    cout << "White wins!" << endl;
+                } else {
+                    black.addWin();
+                    cout << "Black wins!" << endl;
+                }
+
                 cout << "Play again? [Yes] or [No]" << endl;
                 cin >> cmd;
-
+                
                 if (cmd == "No") {
                     if (g->getWinner()) {
                         white.addWin();
@@ -39,6 +49,34 @@ int main(){
                     g = new Game();
                 } else {
                     cout << "Invalid command" << endl;
+                }
+            }
+
+            if (cmd == "move") {
+                g->makeMove();
+                if (g->gameEnded()) {
+                    g->makeMove();
+                    cout << "Play again? [Yes] or [No]" << endl;
+                    cin >> cmd;
+
+                    if (cmd == "No") {
+                        if (g->getWinner()) {
+                            white.addWin();
+                        } else {
+                            black.addWin();
+                        }
+                        break;
+                    } else if (cmd == "Yes") {
+                        if (g->getWinner()) {
+                            white.addWin();
+                        } else {
+                            black.addWin();
+                        }
+                        delete g;
+                        g = new Game();
+                    } else {
+                        cout << "Invalid command" << endl;
+                    }
                 }
             }
         }
