@@ -15,6 +15,7 @@ class Game{
         ~Game();
         bool makeMove();
         void drawScreen();
+        bool getWinner();
 
         Player* player1;
         Player* player2;

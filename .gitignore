@@ -18,6 +18,7 @@ rook.o
 subject.o 
 tile.o 
 sdl_wrap.o
+human.o
 main.d 
 game.d
 textObserver.d
@@ -35,3 +36,4 @@ rook.d
 subject.d
 tile.d
 sdl_wrap.d 
+human.d

@@ -9,7 +9,6 @@ using namespace std;
 SDL_Runner g;
 
 Game::Game(){
-    cout << "Welcome to Chess!" << endl;
     vector<vector<string>> stringBoard;
     stringBoard.resize(8);
     for(int i = 0; i < 8; i++){
@@ -82,6 +81,10 @@ bool Game::makeMove(){
 
     drawScreen();
     return true;
+}
+
+bool Game::getWinner() {
+    return !board->inCheckmate('w');
 }
 
 
@@ -171,52 +174,44 @@ void Game::drawScreen() {
     for(int i = 0; i < 8; i++) {
         for(int j = 0; j < 8; j++) {
             if (textScreen->getState(i,j) == "bR") {
-                s.draw_img("bR", j*75, i*75);
+                s.draw_img("bR", j*75+5, i*75+5);
             }
             if (textScreen->getState(i,j) == "bN") {
-                s.draw_img("bN", j*75, i*75);
+                s.draw_img("bN", j*75+5, i*75+5);
             }
             if (textScreen->getState(i,j) == "bB") {
-                s.draw_img("bB", j*75, i*75);
+                s.draw_img("bB", j*75+5, i*75+5);
             }
             if (textScreen->getState(i,j) == "bK") {
-                s.draw_img("bK", j*75, i*75);
+                s.draw_img("bK", j*75+5, i*75+5);
             }
             if (textScreen->getState(i,j) == "bQ") {
-                s.draw_img("bQ", j*75, i*75);
+                s.draw_img("bQ", j*75+5, i*75+5);
             }
             if (textScreen->getState(i,j) == "bP") {
-                s.draw_img("bP", j*75, i*75);
+                s.draw_img("bP", j*75+5, i*75+5);
             }
 
             if (textScreen->getState(i,j) == "wR") {
-                s.draw_img("wR", j*75, i*75);
+                s.draw_img("wR", j*75+5, i*75+5);
             }
             if (textScreen->getState(i,j) == "wN") {
-                s.draw_img("wN", j*75, i*75);
+                s.draw_img("wN", j*75+5, i*75+5);
             }
             if (textScreen->getState(i,j) == "wB") {
-                s.draw_img("wB", j*75, i*75);
+                s.draw_img("wB", j*75+5, i*75+5);
             }
             if (textScreen->getState(i,j) == "wK") {
-                s.draw_img("wK", j*75, i*75);
+                s.draw_img("wK", j*75+5, i*75+5);
             }
             if (textScreen->getState(i,j) == "wQ") {
-                s.draw_img("wQ", j*75, i*75);
+                s.draw_img("wQ", j*75+5, i*75+5);
             }
             if (textScreen->getState(i,j) == "wP") {
-                s.draw_img("wP", j*75, i*75);
+                s.draw_img("wP", j*75+5, i*75+5);
             }
         }
     }
-
-    for (int i = 0; i < 8; i++) {
-        if (textScreen->getState(i,1) == "bP") {
-            s.draw_img("bP", i*75, 75);
-        }
-    }
-
-
 
     s.update();
 }

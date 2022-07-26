@@ -4,14 +4,13 @@
 #include "move.h"
 #include "board.h"
 
-
-
 class Player {
     protected:
         char color;
     public:
         Player(char color);
         virtual ~Player();
+
         virtual Move getMove(Board *board)=0;
 };
 
