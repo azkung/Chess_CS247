@@ -5,8 +5,9 @@
 using namespace std;
 
 int main(){
-    Human white{'w'};
-    Human black{'b'};
+
+    int whiteWins = 0;
+    int blackWins = 0;
 
     cout << "Welcome to Chess!" << endl;
 
@@ -22,10 +23,10 @@ int main(){
 
             if (cmd == "resign") {
                 if (g->currTurn() == 'b') {
-                    white.addWin();
+                    whiteWins++;
                     cout << "White wins!" << endl;
                 } else {
-                    black.addWin();
+                    blackWins++;
                     cout << "Black wins!" << endl;
                 }
 
@@ -33,18 +34,8 @@ int main(){
                 cin >> cmd;
                 
                 if (cmd == "No") {
-                    if (g->getWinner()) {
-                        white.addWin();
-                    } else {
-                        black.addWin();
-                    }
                     break;
                 } else if (cmd == "Yes") {
-                    if (g->getWinner()) {
-                        white.addWin();
-                    } else {
-                        black.addWin();
-                    }
                     delete g;
                     g = new Game();
                 } else {
@@ -61,16 +52,16 @@ int main(){
 
                     if (cmd == "No") {
                         if (g->getWinner()) {
-                            white.addWin();
+                            whiteWins++;
                         } else {
-                            black.addWin();
+                            blackWins++;
                         }
                         break;
                     } else if (cmd == "Yes") {
                         if (g->getWinner()) {
-                            white.addWin();
+                            whiteWins++;
                         } else {
-                            black.addWin();
+                            blackWins++;
                         }
                         delete g;
                         g = new Game();
@@ -84,8 +75,8 @@ int main(){
     }
 
     cout << "Scores:" << endl;
-    cout << "White: " << white.getScore() << endl;
-    cout << "Black: " << black.getScore() << endl;
+    cout << "White: " << whiteWins << endl;
+    cout << "Black: " << blackWins << endl;
 
     return 0;
 }
