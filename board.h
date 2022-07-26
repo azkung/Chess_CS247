@@ -22,7 +22,7 @@ class Board{
         Board(TextObserver *textScreen);
         Board(const Board &other, TextObserver *textScreen);
         ~Board();
-        std::vector<Move> findMoves(int row, int col);
+        std::vector<Move> findMoves(int row, int col, char playerTurn);
         void killRestrict(std::vector<Move> &moves, char playerTurn);
         bool inCheck(char playerTurn);
         bool inCheckmate(char playerTurn);

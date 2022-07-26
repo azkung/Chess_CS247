@@ -324,6 +324,23 @@ void Board::killRestrict(vector<Move>& moves, char playerTurn){
     delete t;
 }
 
+vector<Move> Board::findMoves(int row, int col, char playerTurn){
+    vector<Move> moves;
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            if(tiles[i][j]->getPiece() != nullptr){
+                vector<Move> temp = tiles[i][j]->findMoves(this);
+                for(int k = 0; k < temp.size(); k++){
+                    moves.push_back(temp[k]);
+                }
+            }
+        }
+    }
+    killRestrict(moves, playerTurn);
+
+    return moves;
+}
+
 
 bool Board::move(int row1, int col1, int row2, int col2){
     vector<Move> moves = tiles[row1][col1]->findMoves(this);
