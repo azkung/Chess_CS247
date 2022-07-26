@@ -12,64 +12,6 @@
 
 using namespace std;
 
-// float Level4Bot::evaluate(Board *board){
-//     float score = 0;
-//     for (int i = 0; i < 8; i++){
-//         for (int j = 0; j < 8; j++){
-//             if (board->getPiece(i, j) != nullptr){
-//                 float distanceFromCenter = sqrt(pow(i - 4.5, 2) + pow(j - 4.5, 2));
-//                 if(board->getPiece(i, j)->getName() == "wP"){
-//                     score += 4;
-//                     score += ((6-round(distanceFromCenter))/30);
-//                 }
-//                 else if(board->getPiece(i, j)->getName() == "wR"){
-//                     score += 20;
-//                     score += ((6-round(distanceFromCenter))/30);
-//                 }
-//                 else if(board->getPiece(i, j)->getName() == "wN"){
-//                     score += 12;
-//                     score += ((6-round(distanceFromCenter))/30);
-//                 }
-//                 else if(board->getPiece(i, j)->getName() == "wB"){
-//                     score += 12;
-//                     score += ((6-round(distanceFromCenter))/30);
-//                 }
-//                 else if(board->getPiece(i, j)->getName() == "wQ"){
-//                     score += 32;
-//                     score += ((6-round(distanceFromCenter))/30);
-//                 }
-//                 else if(board->getPiece(i, j)->getName() == "bP"){
-//                     score -= 4;
-//                     score -= ((6-round(distanceFromCenter))/30);
-//                 }
-//                 else if(board->getPiece(i, j)->getName() == "bR"){
-//                     score -= 20;
-//                     score -= ((6-round(distanceFromCenter))/30);
-//                 }
-//                 else if(board->getPiece(i, j)->getName() == "bN"){
-//                     score -= 12;
-//                     score -= ((6-round(distanceFromCenter))/30);
-//                 }
-//                 else if(board->getPiece(i, j)->getName() == "bB"){
-//                     score -= 12;
-//                     score -= ((6-round(distanceFromCenter))/30);
-//                 }
-//                 else if(board->getPiece(i, j)->getName() == "bQ"){
-//                     score -= 32;
-//                     score -= ((6-round(distanceFromCenter))/30);
-//                 }
-//                 if(board->inCheck('w')){
-//                     score -= 100;
-//                 }
-//                 if(board->inCheck('b')){
-//                     score += 100;
-//                 }
-//             }
-//         }
-//     }
-//     return score;
-// }
-
 float Level4Bot::evaluate(Board *board){
     float score = 0;
     float totalPieces = 0;
