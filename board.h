@@ -28,6 +28,7 @@ class Board{
         bool inCheckmate(char playerTurn);
         Piece* getPiece(int row, int col);
         int getMoveCounter();
+        std::vector<Move> getAllMoves(char color);
         bool move(int row, int col, int newRow, int newCol);
 
         char getTurn();

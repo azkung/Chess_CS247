@@ -1,4 +1,13 @@
 #include "move.h"
+Move::Move(){
+    this->row = -1;
+    this->col = -1;
+    this->prevRow = -1;
+    this->prevCol = -1;
+    this->isCastle = false;
+    this->isEnPassant = false;
+}
+
 
 Move::Move(int row, int col, int prevRow, int prevCol, bool isCastle, bool isEnPassant){
     this->row = row;
