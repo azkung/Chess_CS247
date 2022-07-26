@@ -14,6 +14,7 @@ class Move{
     bool isEnPassant;
 
     public:
+        Move();
         Move(int row, int col, int prevRow, int prevCol, bool isCastle, bool isEnPassant);
         const int getRow();
         const int getCol();

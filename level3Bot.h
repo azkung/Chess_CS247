@@ -4,6 +4,7 @@
 #include "bot.h"
 
 class Level3Bot : public Bot {
+        float evaluate(Board *board);
     public:
         Level3Bot(char color);
         Move getMove(Board *board);
