@@ -6,8 +6,8 @@ using namespace std;
 
 int main(){
     cin.exceptions(ios::eofbit|ios::failbit);
-    int whiteWins = 0;
-    int blackWins = 0;
+    float whiteWins = 0;
+    float blackWins = 0;
 
     cout << "Welcome to Chess!" << endl;
 
@@ -38,10 +38,10 @@ int main(){
             else if(cmd == "resign"){
                 if(g != nullptr && playersInitialized){
                     if (g->currTurn() == 'b') {
-                        whiteWins++;
+                        whiteWins += 1;
                         cout << "White wins! Enter anything to continue" << endl;
                     } else {
-                        blackWins++;
+                        blackWins += 1;
                         cout << "Black wins! Enter anything to continue" << endl;
                     }
                     string temp;
@@ -59,14 +59,16 @@ int main(){
                     g->makeMove();
                     if (g->gameEnded()) {
                         if (g->getWinner() == 'w') {
-                            whiteWins++;
+                            whiteWins += 1;
                             cout << "White wins! Enter anything to continue" << endl;
                         }
                         else if(g->getWinner() == 'b'){
-                            blackWins++;
+                            blackWins += 1;
                             cout << "Black wins! Enter anything to continue" << endl;
                         }
                         else{
+                            whiteWins += 0.5;
+                            blackWins += 0.5;
                             cout << "Draw! Enter anything to continue" << endl;
                         }
                         string temp;
@@ -131,14 +133,16 @@ int main(){
                             if(g->boardIsValid()){
                                 if(g->gameEnded()){
                                     if (g->getWinner() == 'w') {
-                                        whiteWins++;
+                                        whiteWins += 1;
                                         cout << "White wins! Enter anything to continue" << endl;
                                     }
                                     else if(g->getWinner() == 'b'){
-                                        blackWins++;
+                                        blackWins += 1;
                                         cout << "Black wins! Enter anything to continue" << endl;
                                     }
                                     else{
+                                        whiteWins += 0.5;
+                                        blackWins += 0.5;
                                         cout << "Draw! Enter anything to continue" << endl;
                                     }
                                     string temp;
