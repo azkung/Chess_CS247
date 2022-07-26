@@ -15,6 +15,7 @@ class Move;
 class Board{
     std::vector<std::vector<Tile*>> tiles;
     int moveCounter;
+    int turnModifier;
     std::vector<Move> movesMade;
 
 
@@ -30,6 +31,12 @@ class Board{
         int getMoveCounter();
         std::vector<Move> getAllMoves(char color);
         bool move(int row, int col, int newRow, int newCol);
+
+        void setPiece(int row, int col, Piece *piece);
+        void removePiece(int row, int col);
+        void setTurn(char turn);
+
+        bool isValid();
 
         char getTurn();
 

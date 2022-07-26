@@ -78,7 +78,7 @@ int main(){
                                 cout << "Invalid location" << endl;
                             }
                             else{
-                                
+                                g->setPiece(name, colInt, rowInt);
                             }
                         }
                         else if(cmd == "-"){
@@ -91,21 +91,26 @@ int main(){
                                 cout << "Invalid location" << endl;
                             }
                             else{
-
+                                g->removePiece(colInt, rowInt);
                             }
                         }
                         else if(cmd == "="){
                             char color;
                             cin >> color;
                             if(!(color == 'w' || color == 'b')){
-
+                                g->setTurn(color);
                             }
                             else{
-                                cout << "Not a color" << endl;
+                                cout << "Invalid color" << endl;
                             }
                         }
                         else if(cmd == "done"){
-
+                            if(g->boardIsValid()){
+                                break;
+                            }
+                            else{
+                                cout << "Invalid board" << endl;
+                            }
                         }
                         else{
                             cout << "Invalid Setup Command" << endl;

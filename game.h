@@ -16,10 +16,16 @@ class Game{
 
         void initPlayers(char p1, char p2);
 
+        void setPiece(int row, int col, string piece);
+        void removePiece(int x, int y);
+        void setTurn(char turn);
+
         bool makeMove();
         void drawScreen();
         bool getWinner();
         bool gameEnded();
+
+        bool boardIsValid();
 
         char currTurn();
 

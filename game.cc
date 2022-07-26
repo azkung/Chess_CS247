@@ -119,25 +119,6 @@ bool Game::makeMove(){
         }
     }
 
-    // // cout << "Enter a move: ";
-    // char col1, col2, row1, row2;
-    // cin >> col1;
-    // if(col1 == 'x'){
-    //     return false;
-    // }
-    // cin >> row1 >> col2 >> row2;
-    // int col1Int = col1 - 'a';
-    // int col2Int = col2 - 'a';
-    // int row1Int = 7 - (row1 - '1');
-    // int row2Int = 7 - (row2 - '1');
-    // cout << endl;
-
-
-    // if(!board->move(row1Int, col1Int, row2Int, col2Int)){
-    //     cout << "Invalid move!" << endl;
-    // }
-
-
     drawScreen();
     return true;
 }
@@ -287,4 +268,59 @@ Game::~Game(){
     delete player1;
     delete player2;
     delete board;
+}
+
+void Game::setPiece(int row, int col, string piece) {
+    if(piece == "bR") {
+        board->setPiece(row, col, new Rook('b'));
+    }
+    else if(piece == "bN") {
+        board->setPiece(row, col, new Knight('b'));
+    }
+    else if(piece == "bB") {
+        board->setPiece(row, col, new Bishop('b'));
+    }
+    else if(piece == "bK") {
+        board->setPiece(row, col, new King('b'));
+    }
+    else if(piece == "bQ") {
+        board->setPiece(row, col, new Queen('b'));
+    }
+    else if(piece == "bP") {
+        board->setPiece(row, col, new Pawn('b'));
+    }
+    else if(piece == "wR") {
+        board->setPiece(row, col, new Rook('w'));
+    }
+    else if(piece == "wN") {
+        board->setPiece(row, col, new Knight('w'));
+    }
+    else if(piece == "wB") {
+        board->setPiece(row, col, new Bishop('w'));
+    }
+    else if(piece == "wK") {
+        board->setPiece(row, col, new King('w'));
+    }
+    else if(piece == "wQ") {
+        board->setPiece(row, col, new Queen('w'));
+    }
+    else if(piece == "wP") {
+        board->setPiece(row, col, new Pawn('w'));
+    }
+    else{
+        cout << "Invalid piece" << endl;
+    }
+
+}
+
+void Game::removePiece(int row, int col) {
+    board->removePiece(row, col);
+}
+
+void Game::setTurn(char turn) {
+    board->setTurn(turn);
+}
+
+bool Game::boardIsValid() {
+    return board->isValid();
 }

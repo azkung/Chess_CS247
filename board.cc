@@ -13,7 +13,7 @@
 
 using namespace std;
 
-Board::Board(TextObserver *textScreen) : moveCounter{0} {
+Board::Board(TextObserver *textScreen) : moveCounter{0}, turnModifier{0} {
 
     tiles.resize(8);
     for(int i = 0; i < 8; i++){
@@ -77,7 +77,6 @@ Board::Board(const Board &other, TextObserver *textScreen) : moveCounter{other.m
             tiles[i][j] = new Tile(i, j, nullptr);
         }
     }
-
 
     for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8; j++){
@@ -401,7 +400,7 @@ bool Board::move(int row1, int col1, int row2, int col2){
 }
 
 char Board::getTurn(){
-    if(moveCounter % 2 == 0){
+    if((moveCounter+turnModifier) % 2 == 0){
         return 'w';
     }
     return 'b';
@@ -422,4 +421,64 @@ vector<Move> Board::getAllMoves(char playerTurn){
     }
     killRestrict(moves, playerTurn);
     return moves;
+}
+
+void Board::setPiece(int row, int col, Piece* piece){
+    if(tiles[row][col]->getPiece() != nullptr){
+        delete tiles[row][col]->getPiece();
+    }
+    tiles[row][col]->setPiece(piece);
+}
+
+void Board::removePiece(int row, int col){
+    if(tiles[row][col]->getPiece() != nullptr){
+        delete tiles[row][col]->getPiece();
+    }
+    tiles[row][col]->setPiece(nullptr);
+}
+
+void Board::setTurn(char turn){
+    if(turn == 'w'){
+        turnModifier = 0;
+    }
+    else if (turn == 'b'){
+        turnModifier = 1;
+    }
+    else{
+        cout << "Invalid turn" << endl;
+    }
+}
+
+bool Board::isValid(){
+    int whiteKingCounter = 0;
+    int blackKingCounter = 0;
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            if(tiles[i][j]->getPiece() != nullptr){
+                if(tiles[i][j]->getPiece()->getName() == "wK"){
+                    whiteKingCounter++;
+                }
+                else if(tiles[i][j]->getPiece()->getName() == "bK"){
+                    blackKingCounter++;
+                }
+                else if(tiles[i][j]->getPiece()->getName() == "bP"){
+                    if(i == 7 || i == 0){
+                        return false;
+                    }
+                }
+                else if(tiles[i][j]->getPiece()->getName() == "wP"){
+                    if(i == 7 || i == 0){
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+    if(inCheck('w') || inCheck('b')){
+        return false;
+    }
+    if(whiteKingCounter != 1 || blackKingCounter != 1){
+        return false;
+    }
+    return true;
 }
