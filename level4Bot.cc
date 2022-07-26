@@ -5,7 +5,7 @@
 #include <cmath>
 
 #include "board.h"
-#include "level4bot.h"
+#include "level4Bot.h"
 #include "move.h"
 
 using namespace std;
@@ -15,34 +15,34 @@ float Level4Bot::evaluate(Board *board){
     for (int i = 0; i < 8; i++){
         for (int j = 0; j < 8; j++){
             if (board->getPiece(i, j) != nullptr){
-                if(board->getPiece(i, j)->getName() == 'wP'){
+                if(board->getPiece(i, j)->getName() == "wP"){
                     score += 1;
                 }
-                else if(board->getPiece(i, j)->getName() == 'wR'){
+                else if(board->getPiece(i, j)->getName() == "wR"){
                     score += 5;
                 }
-                else if(board->getPiece(i, j)->getName() == 'wN'){
+                else if(board->getPiece(i, j)->getName() == "wN"){
                     score += 3;
                 }
-                else if(board->getPiece(i, j)->getName() == 'wB'){
+                else if(board->getPiece(i, j)->getName() == "wB"){
                     score += 3;
                 }
-                else if(board->getPiece(i, j)->getName() == 'wQ'){
+                else if(board->getPiece(i, j)->getName() == "wQ"){
                     score += 9;
                 }
-                else if(board->getPiece(i, j)->getName() == 'bP'){
+                else if(board->getPiece(i, j)->getName() == "bP"){
                     score -= 1;
                 }
-                else if(board->getPiece(i, j)->getName() == 'bR'){
+                else if(board->getPiece(i, j)->getName() == "bR"){
                     score -= 5;
                 }
-                else if(board->getPiece(i, j)->getName() == 'bN'){
+                else if(board->getPiece(i, j)->getName() == "bN"){
                     score -= 3;
                 }
-                else if(board->getPiece(i, j)->getName() == 'bB'){
+                else if(board->getPiece(i, j)->getName() == "bB"){
                     score -= 3;
                 }
-                else if(board->getPiece(i, j)->getName() == 'bQ'){
+                else if(board->getPiece(i, j)->getName() == "bQ"){
                     score -= 9;
                 }
             }
@@ -51,7 +51,7 @@ float Level4Bot::evaluate(Board *board){
     return score;
 }
 
-std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, int alpha, int beta){
+std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, float alpha, float beta){
     if(board->inCheckmate(color)){
         if(color == 'w'){
             return std::make_pair(std::numeric_limits<float>::lowest(), Move());
@@ -71,7 +71,7 @@ std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, i
         Move bestMove;
         for(int i = 0; i < moves.size(); i++){
             Board *newBoard = new Board(*board);
-            newBoard->makeMove(moves[i]);
+            newBoard->move(moves[i].getPrevRow(), moves[i].getPrevCol(), moves[i].getRow(), moves[i].getCol());
             std::pair<float, Move> temp = minimax(newBoard, 'b', depth - 1, alpha, beta);
             if(temp.first > bestScore){
                 bestScore = temp.first;
@@ -81,6 +81,7 @@ std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, i
             if(beta <= alpha){
                 break;
             }
+            delete newBoard;
         }
         return std::make_pair(bestScore, bestMove);
     }
@@ -89,7 +90,7 @@ std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, i
         Move bestMove;
         for(int i = 0; i < moves.size(); i++){
             Board *newBoard = new Board(*board);
-            newBoard->makeMove(moves[i]);
+            newBoard->move(moves[i].getPrevRow(), moves[i].getPrevCol(), moves[i].getRow(), moves[i].getCol());
             std::pair<float, Move> temp = minimax(newBoard, 'w', depth - 1, alpha, beta);
             if(temp.first < bestScore){
                 bestScore = temp.first;
@@ -99,6 +100,7 @@ std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, i
             if(beta <= alpha){
                 break;
             }
+            delete newBoard;
         }
         return std::make_pair(bestScore, bestMove);
     }

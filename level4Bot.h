@@ -10,7 +10,7 @@
 
 
 class Level4Bot : public Bot {
-        std::pair<float, Board> minimax(Board *board, char color, int depth, int alpha, int beta);
+        std::pair<float, Move> minimax(Board *board, char color, int depth, float alpha, float beta);
         float evaluate(Board *board);
     public:
         Level4Bot(char color);
