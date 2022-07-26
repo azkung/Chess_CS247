@@ -14,6 +14,7 @@ int main(){
     string cmd;
     Game *g = nullptr;
     char p1, p2;
+    bool playersInitialized = false;
 
     try{
         while (true) {
@@ -25,16 +26,17 @@ int main(){
                 else{
                     cin >> p1;
                     cin >> p2;
-                    if(!((p1 == 'h' || p1 == '1'|| p1 == '2'|| p1 == '3'|| p1 == '3') && (p2 == 'h' || p2 == '1'|| p2 == '2'|| p2 == '3'|| p2 == '3'))){
+                    if(!((p1 == 'h' || p1 == '1'|| p1 == '2'|| p1 == '3'|| p1 == '4') && (p2 == 'h' || p2 == '1'|| p2 == '2'|| p2 == '3'|| p2 == '4'))){
                         cout << "Invalid Game Initilization" << endl;
                     }
                     else{
                         g->initPlayers(p1,p2);
+                        playersInitialized = true;
                     }
                 }
             }
             else if(cmd == "resign"){
-                if(g != nullptr){
+                if(g != nullptr && playersInitialized){
                     if (g->currTurn() == 'b') {
                         whiteWins++;
                         cout << "White wins!" << endl;
@@ -42,22 +44,33 @@ int main(){
                         blackWins++;
                         cout << "Black wins!" << endl;
                     }
+                    delete g;
+                    g = nullptr;
+                    playersInitialized = false;
                 }
                 else{
                     cout << "No active game" << endl;
                 }
             }
             else if(cmd == "move"){
-                g->makeMove();
-                if (g->gameEnded()) {
-                    if (g->getWinner()) {
-                        whiteWins++;
+                if(g != nullptr){
+                    g->makeMove();
+                    if (g->gameEnded()) {
+                        if (g->getWinner()) {
+                            whiteWins++;
+                            cout << "White wins!" << endl;
+                        }
+                        else {
+                            blackWins++;
+                            cout << "Black wins!" << endl;
+                        }
+                        delete g;
+                        g = nullptr;
+                        playersInitialized = false;
                     }
-                    else {
-                        blackWins++;
-                    }
-                    delete g;
-                    g = nullptr;
+                }
+                else{
+                    cout << "No active game" << endl;
                 }
             }
             else if(cmd == "setup"){

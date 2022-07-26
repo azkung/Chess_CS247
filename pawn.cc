@@ -18,10 +18,10 @@ vector<Move> Pawn::findMoves(int row, int col, Board *board){
                 moves.push_back(Move(row - 2, col, row, col, false, false));
             }
         }
-        if(col - 1 >= 0 && board->getPiece(row - 1, col - 1) != nullptr && board->getPiece(row - 1, col - 1)->getColor() != color){
+        if(row - 1 >= 0 && col - 1 >= 0 && board->getPiece(row - 1, col - 1) != nullptr && board->getPiece(row - 1, col - 1)->getColor() != color){
             moves.push_back(Move(row - 1, col - 1, row, col, false, false));
         }
-        if(col + 1 < 8 && board->getPiece(row - 1, col + 1) != nullptr && board->getPiece(row - 1, col + 1)->getColor() != color){
+        if(row - 1 >= 0 && col + 1 < 8 && board->getPiece(row - 1, col + 1) != nullptr && board->getPiece(row - 1, col + 1)->getColor() != color){
             moves.push_back(Move(row - 1, col + 1, row, col, false, false));
         }
         if(row == 3){
@@ -44,10 +44,10 @@ vector<Move> Pawn::findMoves(int row, int col, Board *board){
                 moves.push_back(Move(row + 2, col, row, col, false, false));
             }
         }
-        if(col - 1 >= 0 && board->getPiece(row + 1, col - 1) != nullptr && board->getPiece(row + 1, col - 1)->getColor() != color){
+        if(row + 1 < 8 && col - 1 >= 0 && board->getPiece(row + 1, col - 1) != nullptr && board->getPiece(row + 1, col - 1)->getColor() != color){
             moves.push_back(Move(row + 1, col - 1, row, col, false, false));
         }
-        if(col + 1 < 8 && board->getPiece(row + 1, col + 1) != nullptr && board->getPiece(row + 1, col + 1)->getColor() != color){
+        if(row + 1 < 8 && col + 1 < 8 && board->getPiece(row + 1, col + 1) != nullptr && board->getPiece(row + 1, col + 1)->getColor() != color){
             moves.push_back(Move(row + 1, col + 1, row, col, false, false));
         }
         if(row == 4){

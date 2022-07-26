@@ -11,6 +11,7 @@
 
 class Piece;
 class Move;
+class TextObserver;
 
 class Board{
     std::vector<std::vector<Tile*>> tiles;

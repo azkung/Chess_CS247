@@ -1,6 +1,7 @@
 #include "tile.h"
 #include "piece.h"
 #include <string>
+#include "queen.h"
 
 using namespace std;
 
@@ -39,6 +40,22 @@ void Tile::notifyObservers() {
 
 void Tile::setPiece(Piece *p) {
     piece = p;
+    if(row == 0){
+        if(piece != nullptr){
+            if(piece->getName() == "wP"){
+                delete piece;
+                piece = new Queen('w');
+            }
+        }
+    }
+    if(row == 7){
+        if(piece != nullptr){
+            if(piece->getName() == "bP"){
+                delete piece;
+                piece = new Queen('b');
+            }
+        }
+    }
     notifyObservers();
 }
 

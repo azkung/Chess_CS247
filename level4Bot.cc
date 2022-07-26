@@ -3,12 +3,72 @@
 #include <string>
 #include <algorithm>
 #include <cmath>
+#include <math.h>
 
 #include "board.h"
 #include "level4Bot.h"
 #include "move.h"
+#include "textObserver.h"
 
 using namespace std;
+
+// float Level4Bot::evaluate(Board *board){
+//     float score = 0;
+//     for (int i = 0; i < 8; i++){
+//         for (int j = 0; j < 8; j++){
+//             if (board->getPiece(i, j) != nullptr){
+//                 float distanceFromCenter = sqrt(pow(i - 4.5, 2) + pow(j - 4.5, 2));
+//                 if(board->getPiece(i, j)->getName() == "wP"){
+//                     score += 4;
+//                     score += ((6-round(distanceFromCenter))/30);
+//                 }
+//                 else if(board->getPiece(i, j)->getName() == "wR"){
+//                     score += 20;
+//                     score += ((6-round(distanceFromCenter))/30);
+//                 }
+//                 else if(board->getPiece(i, j)->getName() == "wN"){
+//                     score += 12;
+//                     score += ((6-round(distanceFromCenter))/30);
+//                 }
+//                 else if(board->getPiece(i, j)->getName() == "wB"){
+//                     score += 12;
+//                     score += ((6-round(distanceFromCenter))/30);
+//                 }
+//                 else if(board->getPiece(i, j)->getName() == "wQ"){
+//                     score += 32;
+//                     score += ((6-round(distanceFromCenter))/30);
+//                 }
+//                 else if(board->getPiece(i, j)->getName() == "bP"){
+//                     score -= 4;
+//                     score -= ((6-round(distanceFromCenter))/30);
+//                 }
+//                 else if(board->getPiece(i, j)->getName() == "bR"){
+//                     score -= 20;
+//                     score -= ((6-round(distanceFromCenter))/30);
+//                 }
+//                 else if(board->getPiece(i, j)->getName() == "bN"){
+//                     score -= 12;
+//                     score -= ((6-round(distanceFromCenter))/30);
+//                 }
+//                 else if(board->getPiece(i, j)->getName() == "bB"){
+//                     score -= 12;
+//                     score -= ((6-round(distanceFromCenter))/30);
+//                 }
+//                 else if(board->getPiece(i, j)->getName() == "bQ"){
+//                     score -= 32;
+//                     score -= ((6-round(distanceFromCenter))/30);
+//                 }
+//                 if(board->inCheck('w')){
+//                     score -= 100;
+//                 }
+//                 if(board->inCheck('b')){
+//                     score += 100;
+//                 }
+//             }
+//         }
+//     }
+//     return score;
+// }
 
 float Level4Bot::evaluate(Board *board){
     float score = 0;
@@ -16,34 +76,40 @@ float Level4Bot::evaluate(Board *board){
         for (int j = 0; j < 8; j++){
             if (board->getPiece(i, j) != nullptr){
                 if(board->getPiece(i, j)->getName() == "wP"){
-                    score += 1;
+                    score += 4;
                 }
                 else if(board->getPiece(i, j)->getName() == "wR"){
-                    score += 5;
+                    score += 20;
                 }
                 else if(board->getPiece(i, j)->getName() == "wN"){
-                    score += 3;
+                    score += 12;
                 }
                 else if(board->getPiece(i, j)->getName() == "wB"){
-                    score += 3;
+                    score += 12;
                 }
                 else if(board->getPiece(i, j)->getName() == "wQ"){
-                    score += 9;
+                    score += 32;
                 }
                 else if(board->getPiece(i, j)->getName() == "bP"){
-                    score -= 1;
+                    score -= 4;
                 }
                 else if(board->getPiece(i, j)->getName() == "bR"){
-                    score -= 5;
+                    score -= 20;
                 }
                 else if(board->getPiece(i, j)->getName() == "bN"){
-                    score -= 3;
+                    score -= 12;
                 }
                 else if(board->getPiece(i, j)->getName() == "bB"){
-                    score -= 3;
+                    score -= 12;
                 }
                 else if(board->getPiece(i, j)->getName() == "bQ"){
-                    score -= 9;
+                    score -= 32;
+                }
+                if(board->inCheck('w')){
+                    score -= 50;
+                }
+                if(board->inCheck('b')){
+                    score += 50;
                 }
             }
         }
@@ -52,6 +118,7 @@ float Level4Bot::evaluate(Board *board){
 }
 
 std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, float alpha, float beta){
+    std::vector<std::vector<std::string>> stringboard;
     if(board->inCheckmate(color)){
         if(color == 'w'){
             return std::make_pair(std::numeric_limits<float>::lowest(), Move());
@@ -70,7 +137,8 @@ std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, f
         float bestScore = std::numeric_limits<float>::lowest();
         Move bestMove;
         for(int i = 0; i < moves.size(); i++){
-            Board *newBoard = new Board(*board);
+            TextObserver *t = new TextObserver(stringboard);
+            Board* newBoard = new Board(*board, t);
             newBoard->move(moves[i].getPrevRow(), moves[i].getPrevCol(), moves[i].getRow(), moves[i].getCol());
             std::pair<float, Move> temp = minimax(newBoard, 'b', depth - 1, alpha, beta);
             if(temp.first > bestScore){
@@ -82,6 +150,7 @@ std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, f
                 break;
             }
             delete newBoard;
+            delete t;
         }
         return std::make_pair(bestScore, bestMove);
     }
@@ -89,7 +158,8 @@ std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, f
         float bestScore = std::numeric_limits<float>::max();
         Move bestMove;
         for(int i = 0; i < moves.size(); i++){
-            Board *newBoard = new Board(*board);
+            TextObserver *t = new TextObserver(stringboard);
+            Board *newBoard = new Board(*board, t);
             newBoard->move(moves[i].getPrevRow(), moves[i].getPrevCol(), moves[i].getRow(), moves[i].getCol());
             std::pair<float, Move> temp = minimax(newBoard, 'w', depth - 1, alpha, beta);
             if(temp.first < bestScore){
@@ -101,6 +171,7 @@ std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, f
                 break;
             }
             delete newBoard;
+            delete t;
         }
         return std::make_pair(bestScore, bestMove);
     }
@@ -112,12 +183,7 @@ Level4Bot::Level4Bot(char color) : Bot(color) {
 
 
 Move Level4Bot::getMove(Board *board){
-    string cmd;
-    cin >> cmd;
-    if(cmd != "move"){
-        return Move();
-    }
-    std::pair<float, Move> temp = minimax(board, color, 4, std::numeric_limits<float>::lowest(), std::numeric_limits<float>::max());
+    std::pair<float, Move> temp = minimax(board, color, 3, std::numeric_limits<float>::lowest(), std::numeric_limits<float>::max());
     return temp.second;
 }
 
