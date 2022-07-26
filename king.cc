@@ -92,5 +92,4 @@ std::vector<Move> King::findMoves(int row, int col, Board *board){
 
 
     return moves;
-
 }

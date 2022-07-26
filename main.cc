@@ -170,76 +170,14 @@ int main(){
     catch(ios::failure &){
     }
 
+    if(g != nullptr && playersInitialized){
+        delete g;
+    }
+    else if(g != nullptr && !playersInitialized){
+        g->initPlayers('h','h');
+        delete g;
+    }
 
-    // string cmd;
-    // char p1, p2;
-    // cin >> cmd;
-    // if (cmd == "game") {
-    //     while(cin >> p1 >> p2){
-    //         if((p1 == 'h' || p1 == '1'|| p1 == '2'|| p1 == '3'|| p1 == '3') && (p2 == 'h' || p2 == '1'|| p2 == '2'|| p2 == '3'|| p2 == '3')){
-    //             break;
-    //         }
-    //         cout << "Invalid Player Intialization" << endl;
-    //     }
-
-    //     Game* g = new Game();
-    //     g->initPlayers(p1,p2);
-    //     while(true){
-    //         cin >> cmd; 
-
-    //         if (cmd == "resign") {
-    //             if (g->currTurn() == 'b') {
-    //                 whiteWins++;
-    //                 cout << "White wins!" << endl;
-    //             } else {
-    //                 blackWins++;
-    //                 cout << "Black wins!" << endl;
-    //             }
-
-    //             cout << "Play again? [Yes] or [No]" << endl;
-    //             cin >> cmd;
-                
-    //             if (cmd == "No") {
-    //                 break;
-    //             } else if (cmd == "Yes") {
-    //                 delete g;
-    //                 g = new Game();
-    //             } else {
-    //                 cout << "Invalid command" << endl;
-    //             }
-    //         }
-
-    //         if (cmd == "move") {
-    
-    //             g->makeMove();
-    //             if (g->gameEnded()) {
-    //                 g->makeMove();
-    //                 cout << "Play again? [Yes] or [No]" << endl;
-    //                 cin >> cmd;
-
-    //                 if (cmd == "No") {
-    //                     if (g->getWinner()) {
-    //                         whiteWins++;
-    //                     } else {
-    //                         blackWins++;
-    //                     }
-    //                     break;
-    //                 } else if (cmd == "Yes") {
-    //                     if (g->getWinner()) {
-    //                         whiteWins++;
-    //                     } else {
-    //                         blackWins++;
-    //                     }
-    //                     delete g;
-    //                     g = new Game();
-    //                 } else {
-    //                     cout << "Invalid command" << endl;
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     delete g;
-    // }
 
     cout << "Scores:" << endl;
     cout << "White: " << whiteWins << endl;

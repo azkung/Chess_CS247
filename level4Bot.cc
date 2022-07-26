@@ -142,6 +142,8 @@ std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, f
             Board* newBoard = new Board(*board, t);
             newBoard->move(moves[i].getPrevRow(), moves[i].getPrevCol(), moves[i].getRow(), moves[i].getCol());
             std::pair<float, Move> temp = minimax(newBoard, 'b', depth - 1, alpha, beta);
+            delete newBoard;
+            delete t;
             if(temp.first > bestScore){
                 bestScore = temp.first;
                 bestMove = moves[i];
@@ -150,8 +152,6 @@ std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, f
             if(beta <= alpha){
                 break;
             }
-            delete newBoard;
-            delete t;
         }
         return std::make_pair(bestScore, bestMove);
     }
@@ -163,6 +163,8 @@ std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, f
             Board *newBoard = new Board(*board, t);
             newBoard->move(moves[i].getPrevRow(), moves[i].getPrevCol(), moves[i].getRow(), moves[i].getCol());
             std::pair<float, Move> temp = minimax(newBoard, 'w', depth - 1, alpha, beta);
+            delete newBoard;
+            delete t;
             if(temp.first < bestScore){
                 bestScore = temp.first;
                 bestMove = moves[i];
@@ -171,8 +173,6 @@ std::pair<float, Move> Level4Bot::minimax(Board *board, char color, int depth, f
             if(beta <= alpha){
                 break;
             }
-            delete newBoard;
-            delete t;
         }
         return std::make_pair(bestScore, bestMove);
     }

@@ -295,6 +295,7 @@ Game::~Game(){
     delete player1;
     delete player2;
     delete board;
+    delete textScreen;
 }
 
 void Game::setPiece(int row, int col, string piece) {
