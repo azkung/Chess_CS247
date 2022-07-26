@@ -128,4 +128,3 @@ Move Level4Bot::getMove(Board *board){
     std::pair<float, Move> temp = minimax(board, color, 3, std::numeric_limits<float>::lowest(), std::numeric_limits<float>::max());
     return temp.second;
 }
-
